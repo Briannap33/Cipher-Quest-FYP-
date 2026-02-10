@@ -56,3 +56,31 @@ embedded_instances {
     y: 360.0
   }
 }
+embedded_instances {
+  id: "screen_manager"
+  data: "embedded_components {\n"
+  "  id: \"home_proxy\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/assets/screens/home.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"signup_proxy\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/assets/screens/signup.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"login_proxy\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/assets/screens/login.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"character_proxy\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/assets/screens/character_select.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
