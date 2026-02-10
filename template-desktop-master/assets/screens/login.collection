@@ -1,2 +1,10 @@
 name: "login"
 scale_along_z: 0
+embedded_instances {
+  id: "game_object"
+  data: "components {\n"
+  "  id: \"login\"\n"
+  "  component: \"/assets/screens/login.gui\"\n"
+  "}\n"
+  ""
+}
