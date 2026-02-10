@@ -1,5 +1,8 @@
+local router = require "modules.router"
+
 function init(self)
-	msg.post(".", "acquire_input_focus")
+	math.randomseed(os.time())
+	router.go("home")
 end
 
 function on_input(self, action_id, action)
