@@ -1,8 +1,12 @@
 script: "/assets/screens/home.gui_script"
+fonts {
+  name: "ui"
+  font: "/fonts/ui.font"
+}
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 1920.0
+    y: 1080.0
   }
   type: TYPE_BOX
   id: "bg"
@@ -10,19 +14,30 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  position {
+    y: 400.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
   size {
     x: 200.0
     y: 100.0
   }
   type: TYPE_TEXT
   text: "Welcome to CipherQuest"
+  font: "ui"
   id: "title_text"
   inherit_alpha: true
 }
 nodes {
+  position {
+    y: 150.0
+  }
   size {
-    x: 200.0
-    y: 100.0
+    x: 600.0
+    y: 120.0
   }
   type: TYPE_BOX
   id: "btm_signup"
@@ -31,8 +46,8 @@ nodes {
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 600.0
+    y: 120.0
   }
   type: TYPE_BOX
   id: "btn_login"
@@ -40,9 +55,12 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  position {
+    y: -150.0
+  }
   size {
-    x: 200.0
-    y: 100.0
+    x: 600.0
+    y: 120.0
   }
   type: TYPE_BOX
   id: "btn_guest"
@@ -50,12 +68,16 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  position {
+    y: 150.0
+  }
   size {
     x: 200.0
     y: 100.0
   }
   type: TYPE_TEXT
   text: "Create Your Account"
+  font: "ui"
   id: "btn_signup_label"
   inherit_alpha: true
 }
@@ -67,16 +89,21 @@ nodes {
   type: TYPE_TEXT
   text: "Log in now!\n"
   ""
+  font: "ui"
   id: "btn_login_label"
   inherit_alpha: true
 }
 nodes {
+  position {
+    y: -150.0
+  }
   size {
     x: 200.0
     y: 100.0
   }
   type: TYPE_TEXT
   text: "Continue as a Guest"
+  font: "ui"
   id: "btn_guest_label"
   inherit_alpha: true
 }
