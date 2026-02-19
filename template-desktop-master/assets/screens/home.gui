@@ -8,6 +8,11 @@ nodes {
     x: 1920.0
     y: 1080.0
   }
+  color {
+    x: 0.8
+    y: 0.8
+    z: 0.8
+  }
   type: TYPE_BOX
   id: "bg"
   inherit_alpha: true
@@ -25,6 +30,11 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "Welcome to CipherQuest"
   font: "ui"
@@ -39,6 +49,10 @@ nodes {
     x: 600.0
     y: 120.0
   }
+  color {
+    x: 0.6
+    y: 0.7019608
+  }
   type: TYPE_BOX
   id: "btm_signup"
   inherit_alpha: true
@@ -48,6 +62,10 @@ nodes {
   size {
     x: 600.0
     y: 120.0
+  }
+  color {
+    x: 0.6
+    y: 0.7019608
   }
   type: TYPE_BOX
   id: "btn_login"
@@ -62,6 +80,10 @@ nodes {
     x: 600.0
     y: 120.0
   }
+  color {
+    x: 0.6
+    y: 0.7019608
+  }
   type: TYPE_BOX
   id: "btn_guest"
   inherit_alpha: true
@@ -75,6 +97,11 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "Create Your Account"
   font: "ui"
@@ -85,6 +112,11 @@ nodes {
   size {
     x: 200.0
     y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "Log in now!\n"
@@ -100,6 +132,11 @@ nodes {
   size {
     x: 200.0
     y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "Continue as a Guest"
