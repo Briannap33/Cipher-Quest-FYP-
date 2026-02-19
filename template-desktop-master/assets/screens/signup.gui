@@ -1,3 +1,125 @@
 script: "/assets/screens/signup.gui_script"
+fonts {
+  name: "ui"
+  font: "/fonts/ui.font"
+}
+nodes {
+  position {
+    y: 150.0
+  }
+  size {
+    x: 600.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "email_box_field"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: 150.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Email"
+  font: "ui"
+  id: "email_text_field"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 600.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "pass_box_field"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Password"
+  font: "ui"
+  id: "pass_text_field"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -170.0
+  }
+  size {
+    x: 600.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "submit_box_btn"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: -170.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Sign up"
+  font: "ui"
+  id: "submit_btn_label"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -350.0
+    y: 330.0
+  }
+  size {
+    x: 250.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  id: "back_btn"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -350.0
+    y: 330.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "return"
+  font: "ui"
+  id: "back_btn_label"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 260.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "\"\""
+  font: "ui"
+  id: "error_message"
+  inherit_alpha: true
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
