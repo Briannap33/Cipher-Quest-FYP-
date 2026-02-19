@@ -1,7 +1,8 @@
 local router = require "modules.router"
 
 function init(self)
-	math.randomseed(os.time())
+	print("running")
+	-- math.randomseed(os.time())
 	router.go("home")
 end
 
