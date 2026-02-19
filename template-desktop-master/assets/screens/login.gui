@@ -127,6 +127,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "\"\""
+  font: "ui"
   id: "error_message"
   inherit_alpha: true
 }
