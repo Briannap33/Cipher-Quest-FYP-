@@ -8,6 +8,8 @@ function init(self)
 	self.email = ""
 	self.password = ""
 	gui.set_text(gui.get_node("error_message"), "Use: test@example.com / Password123!")
+	local w, h = gui.get_width(), gui.get_height()
+	gui.set_position(gui.get_node("container"), vmath.vector3(w * 0.5, h * 0.5, 0))
 end
 
 local function clicked(id, x, y)
@@ -16,7 +18,7 @@ end
 
 local function refresh(self)
 	gui.set_text(gui.get_node("email_text_field"), self.email)
-	gui.set_text(gui.get_node("password_text_field"), string.rep("*", #self.password))
+	gui.set_text(gui.get_node("pass_text_field"), string.rep("*", #self.password))
 end
 
 local function set_error(msg)

@@ -6,14 +6,12 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	-- enable proxies after they're actually loaded
 	if router.on_message(message_id, message, sender) then
 		return
 	end
 end
 
 function on_input(self, action_id, action)
-	-- forward input to the currently enabled proxy collection
 	if router.current then
 		msg.post(router.current, "input", { action_id = action_id, action = action })
 	end

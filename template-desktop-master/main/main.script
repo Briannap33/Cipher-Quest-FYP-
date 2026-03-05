@@ -3,7 +3,6 @@ local router = require "modules.router"
 function init(self)
 	print("running")
 	math.randomseed(os.time())
-	-- router.go("home")  <-- REMOVE THIS LINE
 end
 
 -- function on_input(self, action_id, action)
