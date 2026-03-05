@@ -196,6 +196,11 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.6
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "\"\""
   font: "ui"
