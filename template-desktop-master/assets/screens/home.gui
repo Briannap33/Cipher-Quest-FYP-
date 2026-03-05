@@ -5,22 +5,32 @@ fonts {
 }
 nodes {
   size {
-    x: 1920.0
-    y: 1080.0
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "container"
+  inherit_alpha: true
+  alpha: 0.5
+}
+nodes {
+  size {
+    x: 1280.0
+    y: 720.0
   }
   color {
-    x: 0.8
-    y: 0.8
-    z: 0.8
+    x: 0.5019608
+    y: 0.5019608
+    z: 0.5019608
   }
   type: TYPE_BOX
   id: "bg"
+  parent: "container"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    y: 400.0
+    y: 295.0
   }
   scale {
     x: 1.5
@@ -39,6 +49,7 @@ nodes {
   text: "Welcome to CipherQuest"
   font: "ui"
   id: "title_text"
+  parent: "container"
   inherit_alpha: true
 }
 nodes {
@@ -54,7 +65,8 @@ nodes {
     y: 0.7019608
   }
   type: TYPE_BOX
-  id: "btm_signup"
+  id: "btn_signup"
+  parent: "container"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -69,6 +81,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "btn_login"
+  parent: "container"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -86,6 +99,7 @@ nodes {
   }
   type: TYPE_BOX
   id: "btn_guest"
+  parent: "container"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -106,6 +120,7 @@ nodes {
   text: "Create Your Account"
   font: "ui"
   id: "btn_signup_label"
+  parent: "container"
   inherit_alpha: true
 }
 nodes {
@@ -123,6 +138,7 @@ nodes {
   ""
   font: "ui"
   id: "btn_login_label"
+  parent: "container"
   inherit_alpha: true
 }
 nodes {
@@ -142,7 +158,8 @@ nodes {
   text: "Continue as a Guest"
   font: "ui"
   id: "btn_guest_label"
+  parent: "container"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
-adjust_reference: ADJUST_REFERENCE_PARENT
+adjust_reference: ADJUST_REFERENCE_DISABLED
