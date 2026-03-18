@@ -18,11 +18,4 @@ function M.set_auth(user_id, access_token)
 	M.access_token = access_token
 end
 
-function M.logout()
-	M.is_guest = true
-	M.user_id = nil
-	M.access_token = nil
-	M.selected_character = nil
-end
-
-return M
+return M  
