@@ -17,25 +17,23 @@ function init(self)
 end
 
 function on_input(self, action_id, action)
-	-- only react on click/tap press
 	if action_id ~= TOUCH or not action.pressed then
-		return
+		return false
 	end
 
-	print("CLICK at:", action.x, action.y)
-
 	if gui.pick_node(self.btn_signup, action.x, action.y) then
-		print("SIGNUP CLICKED")
+		router.go("signup")
 		return true
 	end
 
 	if gui.pick_node(self.btn_login, action.x, action.y) then
-		print("LOGIN CLICKED")
+		router.go("login")
 		return true
 	end
 
 	if gui.pick_node(self.btn_guest, action.x, action.y) then
-		print("GUEST CLICKED")
+		session.start_guest()
+		router.go("character")
 		return true
 	end
 
