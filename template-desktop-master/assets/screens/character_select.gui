@@ -32,6 +32,11 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "Choose your player"
   font: "ui"
@@ -48,6 +53,11 @@ nodes {
     x: 160.0
     y: 160.0
   }
+  color {
+    x: 0.8
+    y: 0.8
+    z: 0.8
+  }
   type: TYPE_BOX
   id: "chrter1_btn"
   parent: "container"
@@ -63,6 +73,11 @@ nodes {
     x: 160.0
     y: 160.0
   }
+  color {
+    x: 0.8
+    y: 0.8
+    z: 0.8
+  }
   type: TYPE_BOX
   id: "chrter2_btn"
   parent: "container"
@@ -77,6 +92,11 @@ nodes {
   size {
     x: 100.0
     y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "tbc\n"
@@ -95,6 +115,11 @@ nodes {
     x: 100.0
     y: 80.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "tbc"
   font: "ui"
@@ -111,6 +136,11 @@ nodes {
     x: 100.0
     y: 80.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "tbc"
   font: "ui"
@@ -126,6 +156,11 @@ nodes {
   size {
     x: 100.0
     y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "tbc\n"
@@ -144,6 +179,10 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.6
+    y: 0.7019608
+  }
   type: TYPE_BOX
   id: "confirm_btn"
   parent: "container"
@@ -158,6 +197,10 @@ nodes {
   size {
     x: 200.0
     y: 100.0
+  }
+  color {
+    x: 0.6
+    y: 0.7019608
   }
   type: TYPE_BOX
   id: "back_btn"
@@ -174,6 +217,11 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
   type: TYPE_TEXT
   text: "Confirm Selection"
   font: "ui"
@@ -189,6 +237,11 @@ nodes {
   size {
     x: 200.0
     y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "Back"
