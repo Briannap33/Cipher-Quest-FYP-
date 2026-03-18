@@ -1,3 +1,201 @@
 script: "/assets/screens/character_select.gui_script"
+fonts {
+  name: "ui"
+  font: "/fonts/ui.font"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "container"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 1280.0
+    y: 720.0
+  }
+  type: TYPE_BOX
+  id: "bg"
+  parent: "container"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: 220.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Choose your player"
+  font: "ui"
+  id: "title_label"
+  parent: "container"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -180.0
+    y: 100.0
+  }
+  size {
+    x: 160.0
+    y: 160.0
+  }
+  type: TYPE_BOX
+  id: "chrter1_btn"
+  parent: "container"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 180.0
+    y: 100.0
+  }
+  size {
+    x: 160.0
+    y: 160.0
+  }
+  type: TYPE_BOX
+  id: "chrter2_btn"
+  parent: "container"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -180.0
+    y: -20.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "tbc\n"
+  ""
+  font: "ui"
+  id: "chrter1_name"
+  parent: "container"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -180.0
+    y: -90.0
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "tbc"
+  font: "ui"
+  id: "chrter1_desc"
+  parent: "container"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 180.0
+    y: -90.0
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "tbc"
+  font: "ui"
+  id: "chrter2_desc"
+  parent: "container"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 180.0
+    y: -20.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "tbc\n"
+  ""
+  font: "ui"
+  id: "chrter2_name"
+  parent: "container"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -120.0
+    y: -200.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "confirm_btn"
+  parent: "container"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 120.0
+    y: -200.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "back_btn"
+  parent: "container"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -120.0
+    y: -200.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Confirm Selection"
+  font: "ui"
+  id: "confirm_txt"
+  parent: "container"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 120.0
+    y: -200.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Back"
+  font: "ui"
+  id: "back_txt"
+  parent: "container"
+  inherit_alpha: true
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
