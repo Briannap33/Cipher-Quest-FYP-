@@ -1,23 +1,28 @@
-local M = { user_id = nil, is_guest = false, email = nil }
+local M = {}
 
-local function gen_guest_id()
-	return ("guest_%d_%d"):format(os.time(), math.random(100000, 999999))
-end
+M.is_guest = true
+M.user_id = nil
+M.access_token = nil
+M.selected_character = nil
 
 function M.start_guest()
-	M.user_id = gen_guest_id()
 	M.is_guest = true
-	M.email = nil
+	M.user_id = "guest_" .. tostring(os.time())
+	M.access_token = nil
+	M.selected_character = nil
 end
 
-function M.login_hardcoded(email, password)
-	if email == "test@example.com" and password == "Password123!" then
-		M.user_id = "user_001"
-		M.is_guest = false
-		M.email = email
-		return true
-	end
-	return false
+function M.set_auth(user_id, access_token)
+	M.is_guest = false
+	M.user_id = user_id
+	M.access_token = access_token
+end
+
+function M.logout()
+	M.is_guest = true
+	M.user_id = nil
+	M.access_token = nil
+	M.selected_character = nil
 end
 
 return M
