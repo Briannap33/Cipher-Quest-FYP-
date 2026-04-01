@@ -4,45 +4,60 @@ local session = require "modules.session"
 local TOUCH = hash("touch")
 
 function init(self)
+	print("CHARACTER INIT")
 	msg.post(".", "acquire_input_focus")
 
 	self.container = gui.get_node("container")
-
+	self.back_btn = gui.get_node("back_btn")
 	self.char1 = gui.get_node("chrter1_btn")
-	self.char2 = gui.get_node("chrter2_btn")
-
+-- 	self.char2 = gui.get_node("chrter2_btn")
+-- 
 	self.selected = nil
 
-	local w,h = gui.get_width(), gui.get_height()
-	gui.set_position(self.container, vmath.vector3(w*0.5, h*0.5, 0))
-end
+	gui.set_texture(self.char1, "characters")
+-- 	gui.set_texture(self.char2, "characters")
+-- 
+	gui.play_flipbook(self.char1, "idle_anim")
+
+	gui.set_scale(self.char1, vmath.vector3(2,2,1))
+-- 	gui.set_scale(self.char2, vmath.vector3(2,2,1))
+	end
 
 local function select_character(self, num)
 	self.selected = num
 	session.selected_character = num
 
-	gui.set_scale(self.char1, vmath.vector3(1,1,1))
-	gui.set_scale(self.char2, vmath.vector3(1,1,1))
+	gui.set_scale(self.char1, vmath.vector3(2, 2, 1))
+	gui.set_scale(self.char2, vmath.vector3(2, 2, 1))
 
 	if num == 1 then
-		gui.set_scale(self.char1, vmath.vector3(1.1,1.1,1))
+		gui.set_scale(self.char1, vmath.vector3(2.3,2.3,1))
 	else
-		gui.set_scale(self.char2, vmath.vector3(1.1,1.1,1))
+		gui.set_scale(self.char2, vmath.vector3(2.3,2.3,1))
 	end
 end
 
 function on_input(self, action_id, action)
-	if action_id ~= TOUCH or not action.pressed then return end
+	if action_id ~= TOUCH or not action.pressed then
+		return false
+	end
 
-	local x,y = action.x, action.y
+	local x, y = action.x, action.y
+
+	if gui.pick_node(self.back_btn, x, y) then
+		router.go("home")
+		return true
+	end
 
 	if gui.pick_node(self.char1, x, y) then
-		select_character(self,1)
+		select_character(self, 1)
 		return true
 	end
 
 	if gui.pick_node(self.char2, x, y) then
-		select_character(self,2)
+		select_character(self, 2)
 		return true
 	end
+
+	return false
 end

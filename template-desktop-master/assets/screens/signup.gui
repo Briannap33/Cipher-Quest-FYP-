@@ -4,6 +4,10 @@ fonts {
   font: "/fonts/ui.font"
 }
 nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
   size {
     x: 200.0
     y: 100.0

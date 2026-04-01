@@ -3,7 +3,15 @@ fonts {
   name: "ui"
   font: "/fonts/ui.font"
 }
+textures {
+  name: "characters"
+  texture: "/assets/charcters/main_char1.tilesource"
+}
 nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
   size {
     x: 200.0
     y: 100.0
