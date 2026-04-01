@@ -1,11 +1,15 @@
 local router = require "modules.router"
 local validators = require "modules.validators"
 
+local SUPABASE_URL = "https://ienyagebfnkrfmajpinv.supabase.co"
+local SUPABASE_ANON_KEY = "sb_publishable_TaUuZ0V_8zDl9pd8WqSAwA_QqzawH0r"
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.active = "email"
 	self.email = ""
 	self.password = ""
+	self.loading = false
 	gui.set_text(gui.get_node("error_message"), "")
 	gui.set_text(gui.get_node("email_text_field"), "")
 	gui.set_text(gui.get_node("pass_text_field"), "")
@@ -24,41 +28,96 @@ local function set_error(msg)
 	gui.set_text(gui.get_node("error_message"), msg or "")
 end
 
+local function signup(self)
+	self.loading = true
+	set_error("Creating account...")
+
+	local body = string.format(
+	'{"email":"%s","password":"%s"}',
+	self.email,
+	self.password
+)
+
+local headers = {
+	["Content-Type"] = "application/json",
+	["apikey"] = SUPABASE_ANON_KEY,
+	["Authorization"] = "Bearer " .. SUPABASE_ANON_KEY
+}
+
+http.request(SUPABASE_URL .. "/auth/v1/signup", "POST", function(_, _, response)
+	self.loading = false
+
+	print("Signup status:", response.status)
+	print("Signup response:", response.response or "")
+
+	if response.status >= 200 and response.status < 300 then
+		set_error("Check your email to verify your account.")
+	else
+		set_error("Signup failed. Please try again.")
+	end
+end, headers, body)
+end
+
 function on_input(self, action_id, action)
-	if action_id == hash("touch") and action.pressed then
-		local x, y = action.x, action.y
+if action_id == hash("touch") and action.pressed then
+	local x, y = action.x, action.y
 
-		if clicked("email_box_field", x, y) then self.active = "email"; set_error(""); return end
-		if clicked("pass_box_field", x, y) then self.active = "password"; set_error(""); return end
+	if clicked("email_box_field", x, y) then
+		self.active = "email"
+		set_error("")
+		return
+	end
 
-		if clicked("back_btn", x, y) then router.go("home"); return end
+	if clicked("pass_box_field", x, y) then
+		self.active = "password"
+		set_error("")
+		return
+	end
 
-		if clicked("submit_box_btn", x, y) then
-			if not validators.email_ok(self.email) then set_error("Enter a valid email"); return end
-			local ok, why = validators.password_ok(self.password)
-			if not ok then set_error(why); return end
+	if clicked("back_btn", x, y) then
+		router.go("home")
+		return
+	end
 
-			-- stub: replacing later with Supabase signup
-			router.go("character")
+	if clicked("submit_box_btn", x, y) then
+		if self.loading then
 			return
 		end
-	end
 
-	if action_id == hash("text") and action.text then
-		local ch = action.text:gsub("[%c]", "")
-		if #ch > 0 then
-			if self.active == "email" then self.email = self.email .. ch
-			else self.password = self.password .. ch end
-			refresh(self)
+		if not validators.email_ok(self.email) then
+			set_error("Enter a valid email")
+			return
 		end
-	end
 
-	if action_id == hash("backspace") and (action.pressed or action.repeated) then
+		local ok, why = validators.password_ok(self.password)
+		if not ok then
+			set_error(why)
+			return
+		end
+
+		signup(self)
+		return
+	end
+end
+
+if action_id == hash("text") and action.text then
+	local ch = action.text:gsub("[%c]", "")
+	if #ch > 0 then
 		if self.active == "email" then
-			self.email = self.email:sub(1, math.max(0, #self.email - 1))
+			self.email = self.email .. ch
 		else
-			self.password = self.password:sub(1, math.max(0, #self.password - 1))
+			self.password = self.password .. ch
 		end
 		refresh(self)
 	end
+end
+
+if action_id == hash("backspace") and (action.pressed or action.repeated) then
+	if self.active == "email" then
+		self.email = self.email:sub(1, math.max(0, #self.email - 1))
+	else
+		self.password = self.password:sub(1, math.max(0, #self.password - 1))
+	end
+	refresh(self)
+end
 end
