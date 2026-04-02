@@ -1,0 +1,15 @@
+animations {
+  id: "man_idle"
+  images {
+    image: "/assets/characters/main-man-idle.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "woman_idle"
+  images {
+    image: "/assets/characters/main-woman-idle.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2

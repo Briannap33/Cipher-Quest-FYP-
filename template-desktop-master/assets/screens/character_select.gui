@@ -5,7 +5,7 @@ fonts {
 }
 textures {
   name: "characters"
-  texture: "/assets/charcters/main_char1.tilesource"
+  texture: "/assets/characters.atlas"
 }
 nodes {
   position {
@@ -22,6 +22,9 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  rotation {
+    x: -2.873
+  }
   size {
     x: 1280.0
     y: 720.0
@@ -54,12 +57,12 @@ nodes {
 }
 nodes {
   position {
-    x: -180.0
+    x: -200.0
     y: 100.0
   }
   size {
-    x: 160.0
-    y: 160.0
+    x: 180.0
+    y: 180.0
   }
   color {
     x: 0.8
@@ -74,12 +77,12 @@ nodes {
 }
 nodes {
   position {
-    x: 180.0
+    x: 200.0
     y: 100.0
   }
   size {
-    x: 160.0
-    y: 160.0
+    x: 180.0
+    y: 180.0
   }
   color {
     x: 0.8
@@ -94,7 +97,7 @@ nodes {
 }
 nodes {
   position {
-    x: -180.0
+    x: -200.0
     y: -20.0
   }
   size {
@@ -116,7 +119,7 @@ nodes {
 }
 nodes {
   position {
-    x: -180.0
+    x: -200.0
     y: -90.0
   }
   size {
@@ -137,7 +140,7 @@ nodes {
 }
 nodes {
   position {
-    x: 180.0
+    x: 200.0
     y: -90.0
   }
   size {
@@ -158,8 +161,11 @@ nodes {
 }
 nodes {
   position {
-    x: 180.0
+    x: 200.0
     y: -20.0
+  }
+  rotation {
+    x: -4.019
   }
   size {
     x: 100.0
@@ -180,11 +186,10 @@ nodes {
 }
 nodes {
   position {
-    x: -120.0
-    y: -200.0
+    y: -250.0
   }
   size {
-    x: 200.0
+    x: 400.0
     y: 100.0
   }
   color {
@@ -199,8 +204,8 @@ nodes {
 }
 nodes {
   position {
-    x: 120.0
-    y: -200.0
+    x: -500.0
+    y: 250.0
   }
   size {
     x: 200.0
@@ -218,11 +223,10 @@ nodes {
 }
 nodes {
   position {
-    x: -120.0
-    y: -200.0
+    y: -250.0
   }
   size {
-    x: 200.0
+    x: 300.0
     y: 100.0
   }
   color {
@@ -239,8 +243,8 @@ nodes {
 }
 nodes {
   position {
-    x: 120.0
-    y: -200.0
+    x: -500.0
+    y: 250.0
   }
   size {
     x: 200.0
