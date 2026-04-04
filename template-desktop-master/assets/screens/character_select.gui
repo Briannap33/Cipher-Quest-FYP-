@@ -5,7 +5,7 @@ fonts {
 }
 textures {
   name: "characters"
-  texture: "/assets/characters.atlas"
+  texture: "/assets/atlases/characters.atlas"
 }
 nodes {
   position {
