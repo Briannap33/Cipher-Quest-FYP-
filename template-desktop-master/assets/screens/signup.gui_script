@@ -47,14 +47,15 @@ local headers = {
 http.request(SUPABASE_URL .. "/auth/v1/signup", "POST", function(_, _, response)
 	self.loading = false
 
-	print("Signup status:", response.status)
-	print("Signup response:", response.response or "")
+	print("SIGNUP STATUS:", response.status)
+	print("SIGNUP BODY:", response.response or "")
 
 	if response.status >= 200 and response.status < 300 then
-		set_error("Check your email to verify your account.")
-	else
-		set_error("Signup failed. Please try again.")
+		set_error("Check your email, verify your account, then go back and log in.")
+		return
 	end
+
+	set_error("Signup failed. Please try again.")
 end, headers, body)
 end
 
