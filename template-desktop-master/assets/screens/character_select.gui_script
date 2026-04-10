@@ -70,8 +70,7 @@ function on_input(self, action_id, action)
 			session.selected_character = self.pending_selection
 			print("Selected character:", self.pending_selection)
 
-			-- will update once next screen created
-			-- router.go("game")
+			router.go("game")
 		else
 			print("No character selected")
 		end

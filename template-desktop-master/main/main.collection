@@ -75,5 +75,11 @@ embedded_instances {
   "  data: \"collection: \\\"/assets/screens/character_select.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"game_proxy\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/assets/levels/game.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }

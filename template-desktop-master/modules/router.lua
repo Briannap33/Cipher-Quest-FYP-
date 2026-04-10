@@ -5,6 +5,7 @@ M.routes = {
 		signup    = msg.url("main:/screen_manager#signup_proxy"),
 		login     = msg.url("main:/screen_manager#login_proxy"),
 		character = msg.url("main:/screen_manager#character_proxy"),
+		game      = msg.url("main:/screen_manager#game_proxy"),
 }
 
 M.current = nil
