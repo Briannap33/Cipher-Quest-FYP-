@@ -1,0 +1,43 @@
+animations {
+  id: "house"
+  images {
+    image: "/assets/images/house.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "dog house"
+  images {
+    image: "/assets/images/doghouse.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "shop"
+  images {
+    image: "/assets/images/shop.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "signal tower"
+  images {
+    image: "/assets/images/signaltower.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "bank2"
+  images {
+    image: "/assets/images/bank2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "bank3"
+  images {
+    image: "/assets/images/bank3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2

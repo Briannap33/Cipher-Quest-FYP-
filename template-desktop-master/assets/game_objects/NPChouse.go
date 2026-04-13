@@ -1,0 +1,16 @@
+embedded_components {
+  id: "homeowner"
+  type: "sprite"
+  data: "default_animation: \"homeowner\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "size {\n"
+  "  x: 32.0\n"
+  "  y: 32.0\n"
+  "}\n"
+  "size_mode: SIZE_MODE_MANUAL\n"
+  "textures {\n"
+  "  sampler: \"texture_sampler\"\n"
+  "  texture: \"/assets/atlases/characters.atlas\"\n"
+  "}\n"
+  ""
+}

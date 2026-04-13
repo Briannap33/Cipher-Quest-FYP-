@@ -12,4 +12,39 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "banker"
+  images {
+    image: "/assets/characters/NPCbank.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "dog"
+  images {
+    image: "/assets/characters/NPCdog.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "shopkeeper"
+  images {
+    image: "/assets/characters/NPCshop.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "towerworker"
+  images {
+    image: "/assets/characters/NPCtower.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "homeowner"
+  images {
+    image: "/assets/characters/NPChouse.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
 extrude_borders: 2

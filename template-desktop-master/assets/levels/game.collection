@@ -335,4 +335,95 @@ instances {
     y: 1.5
   }
 }
+instances {
+  id: "doghouse"
+  prototype: "/assets/game_objects/doghouse.go"
+  position {
+    x: -233.0092
+    y: -276.3945
+  }
+}
+instances {
+  id: "house"
+  prototype: "/assets/game_objects/house.go"
+  position {
+    x: -443.61273
+    y: -243.56775
+  }
+}
+instances {
+  id: "shop"
+  prototype: "/assets/game_objects/shop.go"
+  position {
+    x: 362.94995
+    y: -247.43182
+  }
+}
+instances {
+  id: "signaltower"
+  prototype: "/assets/game_objects/signaltower.go"
+  position {
+    x: 586.54083
+    y: -174.23817
+  }
+  scale3 {
+    y: 2.0
+  }
+}
+instances {
+  id: "bank"
+  prototype: "/assets/game_objects/bank2.go"
+  position {
+    x: 48.46771
+    y: -253.26044
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+  }
+}
+instances {
+  id: "NPChouse"
+  prototype: "/assets/game_objects/NPChouse.go"
+  position {
+    x: -391.84705
+    y: -274.70615
+  }
+}
+instances {
+  id: "NPCdog"
+  prototype: "/assets/game_objects/NPCdog.go"
+  position {
+    x: -193.34377
+    y: -275.89844
+  }
+}
+instances {
+  id: "NPCbanker"
+  prototype: "/assets/game_objects/NPCbanker.go"
+  position {
+    x: 8.559996
+    y: -272.16803
+  }
+}
+instances {
+  id: "NPCshopkeeper"
+  prototype: "/assets/game_objects/NPCshopkeeper.go"
+  position {
+    x: 304.6523
+    y: -274.76
+  }
+  rotation {
+    y: 1.0
+    w: 6.123234E-17
+  }
+}
+instances {
+  id: "NPCworker"
+  prototype: "/assets/game_objects/NPCworker.go"
+  position {
+    x: 567.4926
+    y: -274.96115
+  }
+}
 scale_along_z: 0
