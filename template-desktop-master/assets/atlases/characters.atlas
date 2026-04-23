@@ -62,7 +62,7 @@ animations {
     image: "/assets/characters/malechar4.png.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 10
+  fps: 8
 }
 animations {
   id: "woman_run"
@@ -79,5 +79,6 @@ animations {
     image: "/assets/characters/femalechar4.png.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
 }
 extrude_borders: 2

@@ -303,7 +303,7 @@ instances {
   position {
     x: 1169.0
     y: 27.0
-    z: 3.0
+    z: 2.0
   }
   scale3 {
     x: 1.5
@@ -316,7 +316,7 @@ instances {
   position {
     x: 1217.0
     y: 27.0
-    z: 6.0
+    z: 2.0
   }
   scale3 {
     x: 1.5
@@ -329,7 +329,7 @@ instances {
   position {
     x: 1265.0
     y: 27.0
-    z: 8.0
+    z: 2.0
   }
   scale3 {
     x: 1.5
@@ -377,6 +377,7 @@ instances {
   position {
     x: 688.4677
     y: 108.73956
+    z: 0.5
   }
   scale3 {
     x: 2.0
@@ -463,6 +464,6 @@ embedded_instances {
   position {
     x: 215.0
     y: 121.0
-    z: 3.0
+    z: 10.0
   }
 }

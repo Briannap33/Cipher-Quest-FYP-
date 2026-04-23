@@ -1,10 +1,13 @@
+function init(self)
+	msg.post(".", "acquire_camera_focus")
+end
+
 function update(self, dt)
 	local player_pos = go.get_position("/player")
 	local current_pos = go.get_position()
 
-	local target_x = player_pos.x
-
-	local new_x = current_pos.x + (target_x - current_pos.x) * 5 * dt
+	local follow_speed = 2
+	local new_x = current_pos.x + (player_pos.x - current_pos.x) * follow_speed * dt
 
 	go.set_position(vmath.vector3(new_x, current_pos.y, 3))
 end
