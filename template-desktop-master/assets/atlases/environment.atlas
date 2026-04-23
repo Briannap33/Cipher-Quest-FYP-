@@ -27,13 +27,6 @@ animations {
   playback: PLAYBACK_LOOP_FORWARD
 }
 animations {
-  id: "bank2"
-  images {
-    image: "/assets/images/bank2.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
-}
-animations {
   id: "bank3"
   images {
     image: "/assets/images/bank3.png"

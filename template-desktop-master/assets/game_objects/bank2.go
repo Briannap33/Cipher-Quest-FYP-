@@ -1,5 +1,5 @@
 embedded_components {
-  id: "bank2"
+  id: "bank3"
   type: "sprite"
   data: "default_animation: \"bank3\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"

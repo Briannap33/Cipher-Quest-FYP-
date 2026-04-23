@@ -1,0 +1,11 @@
+local session = require "modules.session"
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	if session.selected_character == 2 then
+		sprite.play_flipbook("#sprite", hash("woman_run"))
+	else
+		sprite.play_flipbook("#sprite", hash("man_run"))
+	end
+end

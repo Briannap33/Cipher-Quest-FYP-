@@ -1,14 +1,14 @@
 animations {
   id: "man_idle"
   images {
-    image: "/assets/characters/main-man-idle.png"
+    image: "/assets/characters/malechar1.png.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
 animations {
   id: "woman_idle"
   images {
-    image: "/assets/characters/main-woman-idle.png"
+    image: "/assets/characters/femalechar1.png.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
@@ -44,6 +44,39 @@ animations {
   id: "homeowner"
   images {
     image: "/assets/characters/NPChouse.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "man_run"
+  images {
+    image: "/assets/characters/malechar1.png.png"
+  }
+  images {
+    image: "/assets/characters/malechar2.png.png"
+  }
+  images {
+    image: "/assets/characters/malechar3.png.png"
+  }
+  images {
+    image: "/assets/characters/malechar4.png.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "woman_run"
+  images {
+    image: "/assets/characters/femalechar1.png.png"
+  }
+  images {
+    image: "/assets/characters/femalechar2.png.png"
+  }
+  images {
+    image: "/assets/characters/femalechar3.png.png"
+  }
+  images {
+    image: "/assets/characters/femalechar4.png.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
