@@ -12,4 +12,7 @@ embedded_components {
   "  texture: \"/assets/atlases/characters.atlas\"\n"
   "}\n"
   ""
+  position {
+    z: -2.0
+  }
 }
