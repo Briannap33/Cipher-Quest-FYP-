@@ -56,7 +56,15 @@ function on_input(self, action_id, action)
 		end
 		return true
 	end
-
+	if action_id == hash("interact") and action.pressed then
+		print("INTERACT pressed")
+		msg.post("/NPCbanker", "try_interact")
+		msg.post("/NPCdog", "try_interact")
+		msg.post("/NPChouse", "try_interact")
+		msg.post("/NPCshopkeeper", "try_interact")
+		msg.post("/NPCworker", "try_interact")
+		return true
+	end
 	return false
 end
 

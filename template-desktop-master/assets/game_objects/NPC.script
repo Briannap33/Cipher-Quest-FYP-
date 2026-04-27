@@ -1,56 +1,68 @@
+go.property("npc_index", 1)
+
+local npc_data = {
+	[1] = {
+		npc_id = "house",
+		dialogue_text = "This house hides an old clue in its walls. See if you can solve it.",
+		challenge_id = "challenge_house"
+	},
+	
+	[2] = {
+		npc_id = "dog",
+		dialogue_text = "Woof! I buried a secret message. Can you sniff out the flag?",
+		challenge_id = "challenge_dog"
+	},
+	[3] = {
+		npc_id = "banker",
+		dialogue_text = "Welcome to the bank. Prove you can decode the vault record.",
+		challenge_id = "challenge_banker"
+	},
+	[4] = {
+		npc_id = "shopkeeper",
+		dialogue_text = "Business is slow. Solve this little puzzle and I might reward you.",
+		challenge_id = "challenge_shopkeeper"
+	},
+	[5] = {
+		npc_id = "worker",
+		dialogue_text = "I found a broken terminal log at the worksite. Maybe you can decode it.",
+		challenge_id = "challenge_worker"
+	}
+}
+
 function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function late_update(self, dt)
-	-- This function is called at the end of update cycle but before render
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	self.player_near = false
+	self.data = npc_data[self.npc_index]
+	print("NPC init:", self.data.npc_id)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
-end
+	if message_id == hash("trigger_response") then
+		print("TRIGGER:", self.data.npc_id, "enter=", message.enter, "exit=", message.exit, "other_group=", message.other_group)
 
-function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
+		if message.enter and message.other_group == hash("player") then
+			self.player_near = true
+			msg.post("/challenge_UI#challenge", "show_interact_prompt", {
+				npc_id = self.data.npc_id
+			})
+		elseif message.exit and message.other_group == hash("player") then
+			self.player_near = false
+			msg.post("/challenge_UI#challenge", "hide_interact_prompt", {
+				npc_id = self.data.npc_id
+			})
+		end
+		return
+	end
 
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
+	if message_id == hash("try_interact") then
+		print("TRY INTERACT:", self.data.npc_id, "near=", self.player_near)
+
+		if self.player_near then
+			msg.post("/challenge_UI#challenge", "start_dialogue", {
+				npc_id = self.data.npc_id,
+				text = self.data.dialogue_text,
+				challenge_id = self.data.challenge_id
+			})
+		end
+		return
+	end
 end

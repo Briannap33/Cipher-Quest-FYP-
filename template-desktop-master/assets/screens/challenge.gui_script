@@ -1,0 +1,43 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	print("GUI init ran")
+
+	gui.set_enabled(gui.get_node("interaction_prompt"), false)
+	gui.set_enabled(gui.get_node("NPC_dialogue"), false)
+	gui.set_enabled(gui.get_node("NPC_dialogue_txt"), false)
+	gui.set_enabled(gui.get_node("continue_txt"), false)
+	gui.set_enabled(gui.get_node("challenge_popup"), false)
+	gui.set_enabled(gui.get_node("challenge_desc"), false)
+	gui.set_enabled(gui.get_node("close_button"), false)
+	gui.set_enabled(gui.get_node("close_bttn_txt"), false)
+
+	gui.set_text(gui.get_node("NPC_dialogue_txt"), "")
+end
+
+function on_message(self, message_id, message, sender)
+	print("GUI got message:", message_id)
+
+	if message_id == hash("show_interact_prompt") then
+		print("Showing interaction prompt")
+		gui.set_enabled(gui.get_node("interaction_prompt"), true)
+		return
+	end
+
+	if message_id == hash("hide_interact_prompt") then
+		print("Hiding interaction prompt")
+		gui.set_enabled(gui.get_node("interaction_prompt"), false)
+		return
+	end
+
+	if message_id == hash("start_dialogue") then
+		print("Starting dialogue for:", message.npc_id)
+
+		gui.set_enabled(gui.get_node("interaction_prompt"), false)
+		gui.set_enabled(gui.get_node("NPC_dialogue"), true)
+		gui.set_enabled(gui.get_node("NPC_dialogue_txt"), true)
+		gui.set_enabled(gui.get_node("continue_txt"), true)
+
+		gui.set_text(gui.get_node("NPC_dialogue_txt"), message.text)
+		return
+	end
+end

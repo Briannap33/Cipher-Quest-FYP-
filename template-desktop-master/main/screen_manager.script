@@ -6,7 +6,7 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if router.on_message(message_id, message, sender) then
+	if router.on_message and router.on_message(message_id, message, sender) then
 		return
 	end
 end

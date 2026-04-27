@@ -1,0 +1,176 @@
+script: "/assets/screens/challenge.gui_script"
+fonts {
+  name: "ui"
+  font: "/fonts/ui.font"
+}
+nodes {
+  position {
+    x: 200.0
+    y: 300.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Press E to interact"
+  font: "ui"
+  id: "interaction_prompt"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 200.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  id: "NPC_dialogue"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+  visible: false
+}
+nodes {
+  position {
+    x: 200.0
+    y: 200.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "continue"
+  font: "ui"
+  id: "continue_txt"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 200.0
+    y: 250.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\"\""
+  font: "ui"
+  id: "NPC_dialogue_txt"
+  line_break: true
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 200.0
+    y: 180.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  color {
+    x: 0.3019608
+    y: 0.2
+    z: 0.6
+  }
+  type: TYPE_BOX
+  id: "challenge_popup"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    x: 200.0
+    y: 200.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "\"\""
+  font: "ui"
+  id: "challenge title"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 180.0
+    y: 180.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\"\""
+  font: "ui"
+  id: "challenge_desc"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 200.0
+    y: 200.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.3019608
+    z: 0.4
+  }
+  type: TYPE_BOX
+  id: "close_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    x: 190.0
+    y: 250.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "close"
+  font: "ui"
+  id: "close_bttn_txt"
+  inherit_alpha: true
+  enabled: false
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

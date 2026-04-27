@@ -3,7 +3,7 @@ instances {
   id: "background"
   prototype: "/assets/game_objects/background.go"
   position {
-    x: 643.0
+    x: 645.0
     y: 361.0
     z: -1.0
   }
@@ -399,6 +399,14 @@ instances {
     x: 449.65625
     y: 86.10156
   }
+  component_properties {
+    id: "NPC"
+    properties {
+      id: "npc_index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
 }
 instances {
   id: "NPCbanker"
@@ -407,6 +415,14 @@ instances {
     x: 651.56
     y: 89.83197
     z: 2.0
+  }
+  component_properties {
+    id: "NPC"
+    properties {
+      id: "npc_index"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
 }
 instances {
@@ -420,6 +436,14 @@ instances {
     y: 1.0
     w: 6.123234E-17
   }
+  component_properties {
+    id: "NPC"
+    properties {
+      id: "npc_index"
+      value: "4.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
 }
 instances {
   id: "NPCworker"
@@ -427,6 +451,14 @@ instances {
   position {
     x: 1210.4927
     y: 87.03885
+  }
+  component_properties {
+    id: "NPC"
+    properties {
+      id: "npc_index"
+      value: "5.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
 }
 instances {
@@ -465,5 +497,22 @@ embedded_instances {
     x: 215.0
     y: 121.0
     z: 10.0
+  }
+  scale3 {
+    x: 5.427804
+    y: 2.910393
+    z: 2.128
+  }
+}
+embedded_instances {
+  id: "challenge_UI"
+  data: "components {\n"
+  "  id: \"challenge\"\n"
+  "  component: \"/assets/screens/challenge.gui\"\n"
+  "}\n"
+  ""
+  scale3 {
+    x: 0.724705
+    y: 1.184513
   }
 }
