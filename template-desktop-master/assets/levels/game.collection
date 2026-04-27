@@ -511,6 +511,10 @@ embedded_instances {
   "  component: \"/assets/screens/challenge.gui\"\n"
   "}\n"
   ""
+  rotation {
+    x: 0.01508379
+    w: 0.9998862
+  }
   scale3 {
     x: 0.724705
     y: 1.184513

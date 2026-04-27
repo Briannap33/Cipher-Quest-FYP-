@@ -76,12 +76,12 @@ nodes {
 }
 nodes {
   position {
-    x: 200.0
-    y: 180.0
+    x: 320.0
+    y: 220.0
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 420.0
+    y: 260.0
   }
   color {
     x: 0.3019608
@@ -92,53 +92,49 @@ nodes {
   id: "challenge_popup"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  enabled: false
 }
 nodes {
   position {
-    x: 200.0
-    y: 200.0
+    y: -120.0
   }
   size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "\"\""
-  font: "ui"
-  id: "challenge_title"
-  inherit_alpha: true
-  enabled: false
-}
-nodes {
-  position {
-    x: 180.0
-    y: 180.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
+    x: 360.0
+    y: 30.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    y: 0.7019608
+    z: 0.4
   }
   type: TYPE_TEXT
-  text: "\"\""
+  text: "result"
   font: "ui"
-  id: "challenge_desc"
+  id: "challenge_result"
+  parent: "challenge_popup"
   inherit_alpha: true
-  enabled: false
 }
 nodes {
   position {
-    x: 200.0
-    y: 200.0
+    x: -70.0
+    y: -85.0
   }
   size {
-    x: 100.0
-    y: 50.0
+    x: 120.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  id: "submit_bttn"
+  parent: "challenge_popup"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 175.0
+    y: 105.0
+  }
+  size {
+    x: 40.0
+    y: 30.0
   }
   color {
     x: 0.6
@@ -147,18 +143,18 @@ nodes {
   }
   type: TYPE_BOX
   id: "close_button"
+  parent: "challenge_popup"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  enabled: false
 }
 nodes {
   position {
-    x: 190.0
-    y: 250.0
+    x: 175.0
+    y: 105.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 40.0
+    y: 30.0
   }
   color {
     x: 0.0
@@ -169,86 +165,141 @@ nodes {
   text: "close"
   font: "ui"
   id: "close_bttn_txt"
+  parent: "challenge_popup"
   inherit_alpha: true
-  enabled: false
 }
 nodes {
   position {
-    x: 100.0
-    y: 50.0
+    y: 45.0
   }
   size {
-    x: 100.0
-    y: 50.0
+    x: 360.0
+    y: 90.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\"\""
+  font: "ui"
+  id: "challenge_desc"
+  line_break: true
+  parent: "challenge_popup"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -25.0
+  }
+  size {
+    x: 260.0
+    y: 40.0
   }
   type: TYPE_BOX
   id: "answer_box"
+  parent: "challenge_popup"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
-  size {
-    x: 200.0
-    y: 100.0
+  position {
+    y: -25.0
   }
-  type: TYPE_BOX
-  id: "submit_bttn"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 240.0
+    y: 30.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "answer\n"
   ""
   font: "ui"
   id: "answer_txt"
+  parent: "challenge_popup"
   inherit_alpha: true
 }
 nodes {
+  position {
+    x: 70.0
+    y: -85.0
+  }
   size {
-    x: 200.0
-    y: 100.0
+    x: 120.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  id: "hint_bttn"
+  parent: "challenge_popup"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -70.0
+    y: -85.0
+  }
+  size {
+    x: 120.0
+    y: 40.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "submit"
   font: "ui"
   id: "submit_txt"
+  parent: "challenge_popup"
   inherit_alpha: true
 }
 nodes {
+  position {
+    y: 90.0
+  }
   size {
-    x: 200.0
-    y: 100.0
+    x: 360.0
+    y: 40.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
-  text: "result"
+  text: "\"\""
   font: "ui"
-  id: "challenge_result"
+  id: "challenge_title"
+  parent: "challenge_popup"
   inherit_alpha: true
 }
 nodes {
-  size {
-    x: 200.0
-    y: 100.0
+  position {
+    x: 70.0
+    y: -85.0
   }
-  type: TYPE_BOX
-  id: "hint_bttn"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 120.0
+    y: 40.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "click here for a hint!"
   font: "ui"
   id: "hint_txt"
+  line_break: true
+  parent: "challenge_popup"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

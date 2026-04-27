@@ -138,19 +138,23 @@ function on_input(self, action_id, action)
 		end
 	end
 
-	if self.challenge_active and action.text then
-		self.answer = self.answer .. action.text
-		gui.set_text(gui.get_node("answer_txt"), self.answer)
-		return true
-	end
-
 	if self.challenge_active and action_id == hash("backspace") and action.pressed then
 		self.answer = string.sub(self.answer, 1, #self.answer - 1)
 		gui.set_text(gui.get_node("answer_txt"), self.answer)
 		return true
 	end
-end
 
+	if self.challenge_active and action_id == hash("text") then
+		print("typed:", action.text)
+
+		if action.text then
+			self.answer = self.answer .. action.text
+			gui.set_text(gui.get_node("answer_txt"), self.answer)
+		end
+
+		return true
+	end
+	
 function show_challenge(self)
 	self.dialogue_active = false
 	self.challenge_active = true
@@ -213,4 +217,5 @@ function check_answer(self)
 	else
 		gui.set_text(gui.get_node("challenge_result"), "Incorrect, try again.")
 	end
+end
 end
