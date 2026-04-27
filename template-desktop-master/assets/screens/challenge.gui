@@ -106,7 +106,7 @@ nodes {
   type: TYPE_TEXT
   text: "\"\""
   font: "ui"
-  id: "challenge title"
+  id: "challenge_title"
   inherit_alpha: true
   enabled: false
 }
@@ -171,6 +171,85 @@ nodes {
   id: "close_bttn_txt"
   inherit_alpha: true
   enabled: false
+}
+nodes {
+  position {
+    x: 100.0
+    y: 50.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  id: "answer_box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "submit_bttn"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "answer\n"
+  ""
+  font: "ui"
+  id: "answer_txt"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "submit"
+  font: "ui"
+  id: "submit_txt"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "result"
+  font: "ui"
+  id: "challenge_result"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "hint_bttn"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "click here for a hint!"
+  font: "ui"
+  id: "hint_txt"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

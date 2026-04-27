@@ -1,43 +1,216 @@
+local challenges = {
+	challenge_house = {
+		title = "House Challenge",
+		desc = "Decode:\nZmxhZ3tob3VzZV9zZWNyZXR9",
+		answer = "flag{house_secret}",
+		hint = "It is Base64.",
+		points = 100
+	},
+
+	challenge_dog = {
+		title = "Dog Challenge",
+		desc = "Decode:\nZmxhZ3tkb2dfc2VjcmV0fQ==",
+		answer = "flag{dog_secret}",
+		hint = "It is also Base64.",
+		points = 100
+	},
+
+	challenge_banker = {
+		title = "Banker Challenge",
+		desc = "Decode the vault record:\nZmxhZ3tiYW5rX3NlY3JldH0=",
+		answer = "flag{bank_secret}",
+		hint = "The vault record is encoded.",
+		points = 150
+	},
+
+	challenge_shopkeeper = {
+		title = "Shopkeeper Challenge",
+		desc = "Solve the shop puzzle:\nZmxhZ3tzaG9wX3NlY3JldH0=",
+		answer = "flag{shop_secret}",
+		hint = "Try decoding the text.",
+		points = 100
+	},
+
+	challenge_worker = {
+		title = "Worker Challenge",
+		desc = "Decode the terminal log:\nZmxhZ3t3b3JrZXJfc2VjcmV0fQ==",
+		answer = "flag{worker_secret}",
+		hint = "Logs sometimes hide encoded strings.",
+		points = 150
+	}
+}
+
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	print("GUI init ran")
 
+	self.dialogue_active = false
+	self.challenge_active = false
+	self.current_challenge_id = nil
+	self.answer = ""
+	
 	gui.set_enabled(gui.get_node("interaction_prompt"), false)
 	gui.set_enabled(gui.get_node("NPC_dialogue"), false)
 	gui.set_enabled(gui.get_node("NPC_dialogue_txt"), false)
 	gui.set_enabled(gui.get_node("continue_txt"), false)
 	gui.set_enabled(gui.get_node("challenge_popup"), false)
+	gui.set_enabled(gui.get_node("challenge_title"), false)
 	gui.set_enabled(gui.get_node("challenge_desc"), false)
 	gui.set_enabled(gui.get_node("close_button"), false)
 	gui.set_enabled(gui.get_node("close_bttn_txt"), false)
-
+	gui.set_enabled(gui.get_node("answer_box"), false)
+	gui.set_enabled(gui.get_node("answer_txt"), false)
+	gui.set_enabled(gui.get_node("submit_bttn"), false)
+	gui.set_enabled(gui.get_node("submit_txt"), false)
+	gui.set_enabled(gui.get_node("challenge_result"), false)
+	gui.set_enabled(gui.get_node("hint_bttn"), false)
+	gui.set_enabled(gui.get_node("hint_txt"), false)
+	
 	gui.set_text(gui.get_node("NPC_dialogue_txt"), "")
+	gui.set_text(gui.get_node("challenge_title"), "")
+	gui.set_text(gui.get_node("challenge_desc"), "")
+	gui.set_text(gui.get_node("answer_txt"), "")
+	gui.set_text(gui.get_node("challenge_result"), "")
+	gui.set_text(gui.get_node("hint_txt"), "")
 end
 
 function on_message(self, message_id, message, sender)
-	print("GUI got message:", message_id)
-
 	if message_id == hash("show_interact_prompt") then
-		print("Showing interaction prompt")
 		gui.set_enabled(gui.get_node("interaction_prompt"), true)
 		return
 	end
 
 	if message_id == hash("hide_interact_prompt") then
-		print("Hiding interaction prompt")
 		gui.set_enabled(gui.get_node("interaction_prompt"), false)
 		return
 	end
 
 	if message_id == hash("start_dialogue") then
-		print("Starting dialogue for:", message.npc_id)
+		self.dialogue_active = true
+		self.current_challenge_id = message.challenge_id
 
 		gui.set_enabled(gui.get_node("interaction_prompt"), false)
+
 		gui.set_enabled(gui.get_node("NPC_dialogue"), true)
 		gui.set_enabled(gui.get_node("NPC_dialogue_txt"), true)
 		gui.set_enabled(gui.get_node("continue_txt"), true)
 
 		gui.set_text(gui.get_node("NPC_dialogue_txt"), message.text)
 		return
+	end
+end
+
+function on_input(self, action_id, action)
+
+	if action_id == hash("touch") and action.pressed then
+		local x = action.x
+		local y = action.y
+
+		if self.dialogue_active then
+			local continue_node = gui.get_node("continue_txt")
+
+			if gui.pick_node(continue_node, x, y) then
+				show_challenge(self)
+				return true
+			end
+		end
+
+		if self.challenge_active then
+			local close_node = gui.get_node("close_button")
+			local submit_node = gui.get_node("submit_bttn")
+			local hint_node = gui.get_node("hint_bttn")
+
+			if gui.pick_node(submit_node, x, y) then
+				check_answer(self)
+				return true
+			end
+
+			if gui.pick_node(hint_node, x, y) then
+				local challenge = challenges[self.current_challenge_id]
+				gui.set_text(gui.get_node("hint_txt"), challenge.hint)
+				return true
+			end
+
+			if gui.pick_node(close_node, x, y) then
+				hide_challenge(self)
+				return true
+			end
+		end
+	end
+
+	if self.challenge_active and action.text then
+		self.answer = self.answer .. action.text
+		gui.set_text(gui.get_node("answer_txt"), self.answer)
+		return true
+	end
+
+	if self.challenge_active and action_id == hash("backspace") and action.pressed then
+		self.answer = string.sub(self.answer, 1, #self.answer - 1)
+		gui.set_text(gui.get_node("answer_txt"), self.answer)
+		return true
+	end
+end
+
+function show_challenge(self)
+	self.dialogue_active = false
+	self.challenge_active = true
+	self.answer = ""
+
+	gui.set_enabled(gui.get_node("NPC_dialogue"), false)
+	gui.set_enabled(gui.get_node("NPC_dialogue_txt"), false)
+	gui.set_enabled(gui.get_node("continue_txt"), false)
+	gui.set_enabled(gui.get_node("answer_box"), true)
+	gui.set_enabled(gui.get_node("answer_txt"), true)
+	gui.set_enabled(gui.get_node("submit_bttn"), true)
+	gui.set_enabled(gui.get_node("submit_txt"), true)
+	gui.set_enabled(gui.get_node("challenge_result"), true)
+	gui.set_enabled(gui.get_node("hint_bttn"), true)
+	gui.set_enabled(gui.get_node("hint_txt"), true)
+	gui.set_enabled(gui.get_node("challenge_popup"), true)
+	gui.set_enabled(gui.get_node("challenge_title"), true)
+	gui.set_enabled(gui.get_node("challenge_desc"), true)
+	gui.set_enabled(gui.get_node("close_button"), true)
+	gui.set_enabled(gui.get_node("close_bttn_txt"), true)
+	
+	gui.set_text(gui.get_node("answer_txt"), "")
+	gui.set_text(gui.get_node("challenge_result"), "")
+	gui.set_text(gui.get_node("hint_txt"), "")
+	local challenge = challenges[self.current_challenge_id]
+
+	if challenge then
+		gui.set_text(gui.get_node("challenge_title"), challenge.title)
+		gui.set_text(gui.get_node("challenge_desc"), challenge.desc)
+	else
+		gui.set_text(gui.get_node("challenge_title"), "Challenge")
+		gui.set_text(gui.get_node("challenge_desc"), "Challenge not found.")
+	end
+end
+
+function hide_challenge(self)
+	self.challenge_active = false
+	self.answer = ""
+
+	gui.set_enabled(gui.get_node("challenge_popup"), false)
+	gui.set_enabled(gui.get_node("challenge_title"), false)
+	gui.set_enabled(gui.get_node("challenge_desc"), false)
+	gui.set_enabled(gui.get_node("close_button"), false)
+	gui.set_enabled(gui.get_node("close_bttn_txt"), false)
+
+	gui.set_enabled(gui.get_node("answer_box"), false)
+	gui.set_enabled(gui.get_node("answer_txt"), false)
+	gui.set_enabled(gui.get_node("submit_bttn"), false)
+	gui.set_enabled(gui.get_node("submit_txt"), false)
+	gui.set_enabled(gui.get_node("challenge_result"), false)
+	gui.set_enabled(gui.get_node("hint_bttn"), false)
+	gui.set_enabled(gui.get_node("hint_txt"), false)
+end
+
+function check_answer(self)
+	local challenge = challenges[self.current_challenge_id]
+
+	if self.answer == challenge.answer then
+		gui.set_text(gui.get_node("challenge_result"), "Correct! +" .. challenge.points .. " points")
+	else
+		gui.set_text(gui.get_node("challenge_result"), "Incorrect, try again.")
 	end
 end
