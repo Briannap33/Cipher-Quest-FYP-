@@ -34,8 +34,24 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("challenge_open") then
 		self.challenge_open = true
+
 	elseif message_id == hash("challenge_closed") then
 		self.challenge_open = false
+
+	elseif message_id == hash("reset_player") then
+		go.set_position(message.position)
+		self.velocity = vmath.vector3(0, 0, 0)
+		self.move_left = false
+		self.move_right = false
+		self.on_ground = true
+		self.challenge_open = false
+
+		msg.post("#sprite", "enable")
+		sprite.play_flipbook("#sprite", hash(self.character_prefix .. "_idle"))
+		self.current_anim = self.character_prefix .. "_idle"
+		sprite.set_hflip("#sprite", false)
+
+		print("RESET PLAYER TO:", go.get_position())
 	end
 end
 
@@ -67,13 +83,14 @@ function on_input(self, action_id, action)
 	end
 	if action_id == hash("interact") and action.pressed then
 		if self.challenge_open then
+			print("Interact blocked: challenge is open")
 			return true
 		end
 
 		print("INTERACT pressed")
-		msg.post("/NPChouse", "try_interact")
-		msg.post("/NPCdog", "try_interact")
 		msg.post("/NPCbanker", "try_interact")
+		msg.post("/NPCdog", "try_interact")
+		msg.post("/NPChouse", "try_interact")
 		msg.post("/NPCshopkeeper", "try_interact")
 		msg.post("/NPCworker", "try_interact")
 		return true

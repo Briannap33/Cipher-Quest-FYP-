@@ -1,0 +1,21 @@
+function init(self)
+	gui.set_text(gui.get_node("score_txt"), "Score: 0")
+	update_hearts(self, 3)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("update_score") then
+		gui.set_text(gui.get_node("score_txt"), "Score: " .. message.score)
+	end
+
+	if message_id == hash("update_lives") then
+		update_hearts(self, message.lives)
+	end
+end
+
+function update_hearts(self, lives)
+	for i = 1, 3 do
+		gui.set_enabled(gui.get_node("heart" .. i .. "_full"), i <= lives)
+		gui.set_enabled(gui.get_node("heart" .. i .. "_empty"), i > lives)
+	end
+end

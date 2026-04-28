@@ -1,0 +1,100 @@
+script: "/assets/screens/hud.gui_script"
+fonts {
+  name: "ui"
+  font: "/fonts/ui.font"
+}
+textures {
+  name: "lives"
+  texture: "/assets/atlases/lives.atlas"
+}
+nodes {
+  position {
+    x: 120.0
+    y: 650.0
+  }
+  size {
+    x: 250.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\"\""
+  font: "ui"
+  id: "score_txt"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NW
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 140.0
+    y: 620.0
+  }
+  type: TYPE_BOX
+  texture: "lives/heart_empty"
+  id: "heart1_empty"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 140.0
+    y: 620.0
+  }
+  type: TYPE_BOX
+  texture: "lives/heart_full"
+  id: "heart1_full"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 180.0
+    y: 620.0
+  }
+  type: TYPE_BOX
+  texture: "lives/heart_empty"
+  id: "heart2_empty"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 180.0
+    y: 620.0
+  }
+  type: TYPE_BOX
+  texture: "lives/heart_full"
+  id: "heart2_full"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 220.0
+    y: 620.0
+  }
+  type: TYPE_BOX
+  texture: "lives/heart_empty"
+  id: "heart3_empty"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 220.0
+    y: 620.0
+  }
+  type: TYPE_BOX
+  texture: "lives/heart_full"
+  id: "heart3_full"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

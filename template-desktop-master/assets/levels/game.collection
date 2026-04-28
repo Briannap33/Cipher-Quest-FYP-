@@ -520,3 +520,11 @@ embedded_instances {
     y: 1.184513
   }
 }
+embedded_instances {
+  id: "hud"
+  data: "components {\n"
+  "  id: \"hud\"\n"
+  "  component: \"/assets/screens/hud.gui\"\n"
+  "}\n"
+  ""
+}

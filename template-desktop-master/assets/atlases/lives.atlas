@@ -1,0 +1,7 @@
+images {
+  image: "/assets/images/heart_full.png"
+}
+images {
+  image: "/assets/images/heart_empty.png"
+}
+extrude_borders: 2

@@ -14,11 +14,21 @@ local challenge_answers = {
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	self.lives = 3
+	msg.post("/hud#hud", "update_lives", { lives = self.lives })
 
 	self.dialogue_active = false
 	self.challenge_active = false
 	self.current_challenge_id = nil
 	self.answer = ""
+	self.score = 0
+	self.completed_challenges = {}
+
+	self.challenge_timer = 0
+	self.penalty_interval = 90 -- 90 secs
+	self.next_penalty_time = self.penalty_interval
+	self.timer_running = false
+	
 	
 	gui.set_enabled(gui.get_node("interaction_prompt"), false)
 	gui.set_enabled(gui.get_node("NPC_dialogue"), false)
@@ -43,6 +53,7 @@ function init(self)
 	gui.set_text(gui.get_node("answer_txt"), "")
 	gui.set_text(gui.get_node("challenge_result"), "")
 	gui.set_text(gui.get_node("hint_txt"), "")
+
 end
 
 function on_message(self, message_id, message, sender)
@@ -164,6 +175,9 @@ function show_challenge(self)
 	self.dialogue_active = false
 	self.challenge_active = true
 	self.answer = ""
+	self.challenge_timer = 0
+	self.next_penalty_time = self.penalty_interval
+	self.timer_running = true
 	msg.post("/player#player", "challenge_open")
 
 	gui.set_enabled(gui.get_node("NPC_dialogue"), false)
@@ -197,6 +211,7 @@ function hide_challenge(self)
 	self.challenge_active = false
 	self.current_challenge_id = nil
 	self.answer = ""
+	self.timer_running = false
 
 	msg.post("/player#player", "challenge_closed")
 	
@@ -226,6 +241,21 @@ function hide_challenge(self)
 	gui.set_enabled(gui.get_node("hint_txt"), false)
 end
 
+function update(self, dt)
+	if self.challenge_active and self.timer_running then
+		self.challenge_timer = self.challenge_timer + dt
+
+		if self.challenge_timer >= self.next_penalty_time then
+			self.score = self.score - 10
+			self.next_penalty_time = self.next_penalty_time + self.penalty_interval
+
+			msg.post("/hud#hud", "update_score", { score = self.score })
+
+			gui.set_text(gui.get_node("challenge_result"), "Time penalty: -10 points")
+		end
+	end
+end
+
 function check_answer(self)
 	local correct_answer = challenge_answers[self.current_challenge_id]
 	local points = 100
@@ -235,8 +265,49 @@ function check_answer(self)
 	end
 
 	if self.answer == correct_answer then
-		gui.set_text(gui.get_node("challenge_result"), "Correct! +" .. points .. " points")
+		self.timer_running = false
+
+		if not self.completed_challenges[self.current_challenge_id] then
+			self.score = self.score + points
+			self.completed_challenges[self.current_challenge_id] = true
+
+			msg.post("/hud#hud", "update_score", { score = self.score })
+
+			gui.set_text(gui.get_node("challenge_result"), "Correct! +" .. points .. " points")
+		else
+			gui.set_text(gui.get_node("challenge_result"), "Already completed. Score: " .. self.score)
+		end
 	else
-		gui.set_text(gui.get_node("challenge_result"), "Incorrect, try again.")
+		self.lives = self.lives - 1
+
+		msg.post("/hud#hud", "update_lives", { lives = self.lives })
+
+		if self.lives <= 0 then
+			mission_failed(self)
+		else
+			gui.set_text(gui.get_node("challenge_result"), "Incorrect! Lives left: " .. self.lives)
+		end
 	end
+end
+
+function mission_failed(self)
+	self.score = 0
+	self.lives = 3
+	self.completed_challenges = {}
+	self.timer_running = false
+
+	msg.post("/hud#hud", "update_score", { score = self.score })
+	msg.post("/hud#hud", "update_lives", { lives = self.lives })
+
+	gui.set_text(gui.get_node("challenge_title"), "Mission Failed")
+	gui.set_text(gui.get_node("challenge_desc"), "You got 3 answers wrong.\nReturning to start...")
+	gui.set_text(gui.get_node("challenge_result"), "")
+
+	msg.post("/player#player", "reset_player", {
+		position = vmath.vector3(40, 87, -1)
+	})
+
+	timer.delay(2, false, function()
+		hide_challenge(self)
+	end)
 end
