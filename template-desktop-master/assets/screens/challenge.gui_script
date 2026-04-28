@@ -1,43 +1,14 @@
-local challenges = {
-	challenge_house = {
-		title = "House Challenge",
-		desc = "Decode:\nZmxhZ3tob3VzZV9zZWNyZXR9",
-		answer = "flag{house_secret}",
-		hint = "It is Base64.",
-		points = 100
-	},
+local json = require "json"
 
-	challenge_dog = {
-		title = "Dog Challenge",
-		desc = "Decode:\nZmxhZ3tkb2dfc2VjcmV0fQ==",
-		answer = "flag{dog_secret}",
-		hint = "It is also Base64.",
-		points = 100
-	},
+local SUPABASE_URL = "https://ienyagebfnkrfmajpinv.supabase.co"
+local SUPABASE_ANON_KEY = "sb_publishable_TaUuZ0V_8zDl9pd8WqSAwA_QqzawH0r"
 
-	challenge_banker = {
-		title = "Banker Challenge",
-		desc = "Decode the vault record:\nZmxhZ3tiYW5rX3NlY3JldH0=",
-		answer = "flag{bank_secret}",
-		hint = "The vault record is encoded.",
-		points = 150
-	},
-
-	challenge_shopkeeper = {
-		title = "Shopkeeper Challenge",
-		desc = "Solve the shop puzzle:\nZmxhZ3tzaG9wX3NlY3JldH0=",
-		answer = "flag{shop_secret}",
-		hint = "Try decoding the text.",
-		points = 100
-	},
-
-	challenge_worker = {
-		title = "Worker Challenge",
-		desc = "Decode the terminal log:\nZmxhZ3t3b3JrZXJfc2VjcmV0fQ==",
-		answer = "flag{worker_secret}",
-		hint = "Logs sometimes hide encoded strings.",
-		points = 150
-	}
+local challenge_answers = {
+	challenge_house = "flag{house_secret}",
+	challenge_dog = "flag{dog_secret}",
+	challenge_banker = "flag{bank_secret}",
+	challenge_shopkeeper = "flag{shop_secret}",
+	challenge_worker = "flag{worker_secret}"
 }
 
 
@@ -136,8 +107,9 @@ function on_input(self, action_id, action)
 			end
 
 			if gui.pick_node(hint_node, x, y) then
-				local challenge = challenges[self.current_challenge_id]
-				gui.set_text(gui.get_node("hint_txt"), challenge.hint)
+				if self.current_challenge and self.current_challenge.hint then
+					gui.set_text(gui.get_node("hint_txt"), self.current_challenge.hint)
+				end
 				return true
 			end
 
@@ -166,6 +138,28 @@ function on_input(self, action_id, action)
 	end
 end
 
+function fetch_challenge(self, challenge_id)
+	local url = SUPABASE_URL .. "/rest/v1/challenges?id=eq." .. challenge_id .. "&select=*"
+
+	local headers = {
+		["apikey"] = SUPABASE_ANON_KEY,
+		["Authorization"] = "Bearer " .. SUPABASE_ANON_KEY
+	}
+
+	http.request(url, "GET", function(self, id, response)
+		if response.status == 200 then
+			local data = json.decode(response.response)
+			local challenge = data[1]
+
+			if challenge then
+				self.current_challenge = challenge
+				gui.set_text(gui.get_node("challenge_title"), challenge.title)
+				gui.set_text(gui.get_node("challenge_desc"), challenge.description)
+			end
+		end
+	end, headers)
+end
+
 function show_challenge(self)
 	self.dialogue_active = false
 	self.challenge_active = true
@@ -191,15 +185,11 @@ function show_challenge(self)
 	gui.set_text(gui.get_node("answer_txt"), "")
 	gui.set_text(gui.get_node("challenge_result"), "")
 	gui.set_text(gui.get_node("hint_txt"), "")
-	local challenge = challenges[self.current_challenge_id]
+	gui.set_text(gui.get_node("challenge_title"), "Loading...")
+	gui.set_text(gui.get_node("challenge_desc"), "")
 
-	if challenge then
-		gui.set_text(gui.get_node("challenge_title"), challenge.title)
-		gui.set_text(gui.get_node("challenge_desc"), challenge.desc)
-	else
-		gui.set_text(gui.get_node("challenge_title"), "Challenge")
-		gui.set_text(gui.get_node("challenge_desc"), "Challenge not found.")
-	end
+	fetch_challenge(self, self.current_challenge_id)
+	
 end
 
 function hide_challenge(self)
@@ -237,10 +227,15 @@ function hide_challenge(self)
 end
 
 function check_answer(self)
-	local challenge = challenges[self.current_challenge_id]
+	local correct_answer = challenge_answers[self.current_challenge_id]
+	local points = 100
 
-	if self.answer == challenge.answer then
-		gui.set_text(gui.get_node("challenge_result"), "Correct! +" .. challenge.points .. " points")
+	if self.current_challenge and self.current_challenge.points then
+		points = self.current_challenge.points
+	end
+
+	if self.answer == correct_answer then
+		gui.set_text(gui.get_node("challenge_result"), "Correct! +" .. points .. " points")
 	else
 		gui.set_text(gui.get_node("challenge_result"), "Incorrect, try again.")
 	end
