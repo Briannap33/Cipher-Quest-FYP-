@@ -1,28 +1,28 @@
 go.property("npc_index", 1)
 
 local npc_data = {
-	[1] = {
+	[1.0] = {
 		npc_id = "house",
 		dialogue_text = "This house hides an old clue in its walls. See if you can solve it.",
 		challenge_id = "challenge_house"
 	},
 	
-	[2] = {
+	[2.0] = {
 		npc_id = "dog",
 		dialogue_text = "Woof! I buried a secret message. Can you sniff out the flag?",
 		challenge_id = "challenge_dog"
 	},
-	[3] = {
+	[3.0] = {
 		npc_id = "banker",
 		dialogue_text = "Welcome to the bank. Prove you can decode the vault record.",
 		challenge_id = "challenge_banker"
 	},
-	[4] = {
+	[4.0] = {
 		npc_id = "shopkeeper",
 		dialogue_text = "Business is slow. Solve this little puzzle and I might reward you.",
 		challenge_id = "challenge_shopkeeper"
 	},
-	[5] = {
+	[5.0] = {
 		npc_id = "worker",
 		dialogue_text = "I found a broken terminal log at the worksite. Maybe you can decode it.",
 		challenge_id = "challenge_worker"
@@ -37,19 +37,22 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") then
-		print("TRIGGER:", self.data.npc_id, "enter=", message.enter, "exit=", message.exit, "other_group=", message.other_group)
+		print("TRIGGER:", self.data.npc_id, "enter=", message.enter, "other_group=", message.other_group)
 
-		if message.enter and message.other_group == hash("player") then
-			self.player_near = true
-			msg.post("/challenge_UI#challenge", "show_interact_prompt", {
-				npc_id = self.data.npc_id
-			})
-		elseif message.exit and message.other_group == hash("player") then
-			self.player_near = false
-			msg.post("/challenge_UI#challenge", "hide_interact_prompt", {
-				npc_id = self.data.npc_id
-			})
+		if message.other_group == hash("player") then
+			if message.enter == true then
+				self.player_near = true
+				msg.post("/challenge_UI#challenge", "show_interact_prompt", {
+					npc_id = self.data.npc_id
+				})
+			else
+				self.player_near = false
+				msg.post("/challenge_UI#challenge", "hide_interact_prompt", {
+					npc_id = self.data.npc_id
+				})
+			end
 		end
+
 		return
 	end
 

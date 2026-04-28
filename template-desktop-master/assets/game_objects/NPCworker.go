@@ -1,6 +1,11 @@
 components {
   id: "NPC"
   component: "/assets/game_objects/NPC.script"
+  properties {
+    id: "npc_index"
+    value: "5.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
 }
 embedded_components {
   id: "towerworker"

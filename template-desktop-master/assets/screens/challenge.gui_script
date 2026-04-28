@@ -87,10 +87,19 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == hash("start_dialogue") then
 		self.dialogue_active = true
+		self.challenge_active = false
 		self.current_challenge_id = message.challenge_id
+		self.answer = ""
+
+		gui.set_text(gui.get_node("answer_txt"), "")
+		gui.set_text(gui.get_node("challenge_result"), "")
+		gui.set_text(gui.get_node("hint_txt"), "")
+		gui.set_text(gui.get_node("challenge_title"), "")
+		gui.set_text(gui.get_node("challenge_desc"), "")
+
+		gui.set_enabled(gui.get_node("challenge_popup"), false)
 
 		gui.set_enabled(gui.get_node("interaction_prompt"), false)
-
 		gui.set_enabled(gui.get_node("NPC_dialogue"), true)
 		gui.set_enabled(gui.get_node("NPC_dialogue_txt"), true)
 		gui.set_enabled(gui.get_node("continue_txt"), true)
@@ -99,6 +108,7 @@ function on_message(self, message_id, message, sender)
 		return
 	end
 end
+
 
 function on_input(self, action_id, action)
 
@@ -154,11 +164,13 @@ function on_input(self, action_id, action)
 
 		return true
 	end
-	
+end
+
 function show_challenge(self)
 	self.dialogue_active = false
 	self.challenge_active = true
 	self.answer = ""
+	msg.post("/player#player", "challenge_open")
 
 	gui.set_enabled(gui.get_node("NPC_dialogue"), false)
 	gui.set_enabled(gui.get_node("NPC_dialogue_txt"), false)
@@ -191,8 +203,23 @@ function show_challenge(self)
 end
 
 function hide_challenge(self)
+	self.dialogue_active = false
 	self.challenge_active = false
+	self.current_challenge_id = nil
 	self.answer = ""
+
+	msg.post("/player#player", "challenge_closed")
+	
+	gui.set_text(gui.get_node("NPC_dialogue_txt"), "")
+	gui.set_text(gui.get_node("challenge_title"), "")
+	gui.set_text(gui.get_node("challenge_desc"), "")
+	gui.set_text(gui.get_node("answer_txt"), "")
+	gui.set_text(gui.get_node("challenge_result"), "")
+	gui.set_text(gui.get_node("hint_txt"), "")
+
+	gui.set_enabled(gui.get_node("NPC_dialogue"), false)
+	gui.set_enabled(gui.get_node("NPC_dialogue_txt"), false)
+	gui.set_enabled(gui.get_node("continue_txt"), false)
 
 	gui.set_enabled(gui.get_node("challenge_popup"), false)
 	gui.set_enabled(gui.get_node("challenge_title"), false)
@@ -217,5 +244,4 @@ function check_answer(self)
 	else
 		gui.set_text(gui.get_node("challenge_result"), "Incorrect, try again.")
 	end
-end
 end

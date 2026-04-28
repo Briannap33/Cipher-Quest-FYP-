@@ -377,7 +377,7 @@ instances {
   position {
     x: 688.4677
     y: 108.73956
-    z: 0.5
+    z: 1.0
   }
   scale3 {
     x: 2.0
@@ -412,8 +412,8 @@ instances {
   id: "NPCbanker"
   prototype: "/assets/game_objects/NPCbanker.go"
   position {
-    x: 651.56
-    y: 89.83197
+    x: 700.0
+    y: 86.0
     z: 2.0
   }
   component_properties {

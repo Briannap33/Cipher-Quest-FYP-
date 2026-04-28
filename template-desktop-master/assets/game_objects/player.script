@@ -12,7 +12,8 @@ function init(self)
 	self.move_right = false
 	self.velocity = vmath.vector3(0, 0, 0)
 	self.on_ground = true
-
+	self.challenge_open = false
+	
 	self.character_prefix = "man"
 	if session.selected_character == 2 then
 		self.character_prefix = "woman"
@@ -27,6 +28,14 @@ local function play_anim(self, anim_name)
 	if self.current_anim ~= anim_name then
 		sprite.play_flipbook("#sprite", hash(anim_name))
 		self.current_anim = anim_name
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("challenge_open") then
+		self.challenge_open = true
+	elseif message_id == hash("challenge_closed") then
+		self.challenge_open = false
 	end
 end
 
@@ -57,15 +66,18 @@ function on_input(self, action_id, action)
 		return true
 	end
 	if action_id == hash("interact") and action.pressed then
+		if self.challenge_open then
+			return true
+		end
+
 		print("INTERACT pressed")
-		msg.post("/NPCbanker", "try_interact")
-		msg.post("/NPCdog", "try_interact")
 		msg.post("/NPChouse", "try_interact")
+		msg.post("/NPCdog", "try_interact")
+		msg.post("/NPCbanker", "try_interact")
 		msg.post("/NPCshopkeeper", "try_interact")
 		msg.post("/NPCworker", "try_interact")
 		return true
 	end
-	return false
 end
 
 function update(self, dt)

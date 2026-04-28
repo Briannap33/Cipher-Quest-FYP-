@@ -1,6 +1,11 @@
 components {
   id: "NPC"
   component: "/assets/game_objects/NPC.script"
+  properties {
+    id: "npc_index"
+    value: "3.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
 }
 embedded_components {
   id: "banker"
@@ -16,8 +21,8 @@ embedded_components {
 embedded_components {
   id: "interaction"
   type: "collisionobject"
-  data: "type: COLLISION_OBJECT_TYPE_DYNAMIC\n"
-  "mass: 1.0\n"
+  data: "type: COLLISION_OBJECT_TYPE_TRIGGER\n"
+  "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
   "group: \"NPC\"\n"
