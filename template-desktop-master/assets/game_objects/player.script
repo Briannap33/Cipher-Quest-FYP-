@@ -109,7 +109,11 @@ function update(self, dt)
 
 	local pos = go.get_position()
 
+	local MIN_X = 220
+	local MAX_X = 4000
+
 	pos.x = pos.x + dir * SPEED * dt
+	pos.x = math.max(MIN_X, math.min(pos.x, MAX_X))	
 
 	self.velocity.y = self.velocity.y + GRAVITY * dt
 	pos.y = pos.y + self.velocity.y * dt
@@ -124,9 +128,7 @@ function update(self, dt)
 
 	go.set_position(pos)
 
-	if not self.on_ground then
-		play_anim(self, self.character_prefix .. "_jump")
-	elseif dir ~= 0 then
+	if dir ~= 0 then
 		play_anim(self, self.character_prefix .. "_run")
 	else
 		play_anim(self, self.character_prefix .. "_idle")

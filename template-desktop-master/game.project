@@ -1,5 +1,6 @@
 [project]
 title = MyDesktopProject
+dependencies#0 = https://github.com/rxi/json.lua/archive/master.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc

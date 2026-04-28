@@ -1,5 +1,15 @@
+local MIN_X = 300
+local MAX_X = 1000
+local CAMERA_Y = 165
+local CAMERA_Z = 3
+
 function init(self)
 	msg.post(".", "acquire_camera_focus")
+
+	local player_pos = go.get_position("/player")
+	local start_x = math.max(player_pos.x, MIN_X)
+
+	go.set_position(vmath.vector3(start_x, CAMERA_Y, CAMERA_Z))
 end
 
 function update(self, dt)
@@ -7,7 +17,12 @@ function update(self, dt)
 	local current_pos = go.get_position()
 
 	local follow_speed = 2
-	local new_x = current_pos.x + (player_pos.x - current_pos.x) * follow_speed * dt
 
-	go.set_position(vmath.vector3(new_x, current_pos.y, 3))
+	
+	local target_x = math.max(MIN_X, math.min(player_pos.x, MAX_X))
+
+
+	local new_x = current_pos.x + (target_x - current_pos.x) * follow_speed * dt
+
+	go.set_position(vmath.vector3(new_x, CAMERA_Y, CAMERA_Z))
 end

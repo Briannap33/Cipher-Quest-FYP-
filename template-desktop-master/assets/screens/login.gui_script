@@ -1,5 +1,7 @@
 local router = require "modules.router"
 local validators = require "modules.validators"
+local json = require "modules.json"
+local session = require "modules.session"
 
 local SUPABASE_URL = "https://ienyagebfnkrfmajpinv.supabase.co"
 local SUPABASE_ANON_KEY = "sb_publishable_TaUuZ0V_8zDl9pd8WqSAwA_QqzawH0r"
@@ -56,6 +58,12 @@ http.request(url, "POST", function(_, _, response)
 	print("LOGIN BODY:", response.response or "")
 
 	if response.status == 200 then
+		local data = json.decode(response.response)
+
+		session.start_user(data)
+
+		print("LOGGED IN USER:", session.user_id)
+
 		router.go("character")
 		return
 	end

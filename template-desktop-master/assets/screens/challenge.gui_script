@@ -1,4 +1,5 @@
-local json = require "json"
+local json = require "modules.json"
+local session = require "modules.session"
 
 local SUPABASE_URL = "https://ienyagebfnkrfmajpinv.supabase.co"
 local SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImllbnlhZ2ViZm5rcmZtYWpwaW52Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3OTU2OTUsImV4cCI6MjA4OTM3MTY5NX0.OXo8J1cMpWT049kS20CwxZ_btQ_irjfriy1CLMz02PY"
@@ -45,6 +46,7 @@ function init(self)
 	gui.set_text(gui.get_node("answer_txt"), "")
 	gui.set_text(gui.get_node("challenge_result"), "")
 	gui.set_text(gui.get_node("hint_txt"), "")
+	load_progress(self)
 
 end
 
@@ -147,7 +149,7 @@ function fetch_challenge(self, challenge_id)
 	local headers = {
 		["apikey"] = SUPABASE_ANON_KEY,
 		["Authorization"] = "Bearer " .. SUPABASE_ANON_KEY
-	}
+		}
 
 	http.request(url, "GET", function(self, id, response)
 		if response.status == 200 then
@@ -252,6 +254,7 @@ function update(self, dt)
 			self.next_penalty_time = self.next_penalty_time + self.penalty_interval
 
 			msg.post("/hud#hud", "update_score", { score = self.score })
+			save_progress(self, 0)
 
 			gui.set_text(gui.get_node("challenge_result"), "Time penalty: -" .. self.time_penalty .. " points")		end
 	end
@@ -264,10 +267,11 @@ function answer_check(self)
 		challenge_id = self.current_challenge_id,
 		answer = self.answer
 	})
-
+	local auth_token = session.access_token or SUPABASE_ANON_KEY
+	
 	local headers = {
 		["apikey"] = SUPABASE_ANON_KEY,
-		["Authorization"] = "Bearer " .. SUPABASE_ANON_KEY,
+		["Authorization"] = "Bearer " .. auth_token,
 		["Content-Type"] = "application/json"
 	}
 
@@ -286,6 +290,8 @@ function answer_check(self)
 
 					msg.post("/hud#hud", "update_score", { score = self.score })
 
+					save_progress(self, points)
+					
 					gui.set_text(gui.get_node("challenge_result"), "Correct! +" .. points .. " points")
 				else
 					gui.set_text(gui.get_node("challenge_result"), "Already completed. Score: " .. self.score)
@@ -312,6 +318,7 @@ function mission_failed(self)
 	self.lives = 3
 	self.completed_challenges = {}
 	self.timer_running = false
+	reset_progress(self)
 
 	msg.post("/hud#hud", "update_score", { score = self.score })
 	msg.post("/hud#hud", "update_lives", { lives = self.lives })
@@ -327,4 +334,126 @@ function mission_failed(self)
 	timer.delay(2, false, function()
 		hide_challenge(self)
 	end)
+end
+function save_progress(self, points)
+	if session.is_guest or not session.access_token then
+		print("Guest mode: progress not saved")
+		return
+	end
+
+	local headers = {
+		["apikey"] = SUPABASE_ANON_KEY,
+		["Authorization"] = "Bearer " .. session.access_token,
+		["Content-Type"] = "application/json",
+		["Prefer"] = "resolution=merge-duplicates"
+	}
+
+	local progress_body = json.encode({
+		user_id = session.user_id,
+		challenge_id = self.current_challenge_id,
+		completed = true,
+		score_awarded = points,
+		completed_at = os.date("!%Y-%m-%dT%H:%M:%SZ")
+	})
+
+	http.request(SUPABASE_URL .. "/rest/v1/player_progress", "POST", function(_, _, response)
+		print("SAVE PROGRESS:", response.status, response.response or "")
+	end, headers, progress_body)
+
+	local state_body = json.encode({
+		user_id = session.user_id,
+		score = self.score,
+		lives = self.lives,
+		updated_at = os.date("!%Y-%m-%dT%H:%M:%SZ")
+	})
+
+	http.request(SUPABASE_URL .. "/rest/v1/player_state", "POST", function(_, _, response)
+		print("SAVE STATE:", response.status, response.response or "")
+	end, headers, state_body)
+end
+
+function load_progress(self)
+	if session.is_guest or not session.access_token then
+		print("Guest mode: progress not loaded")
+		return
+	end
+
+	local headers = {
+		["apikey"] = SUPABASE_ANON_KEY,
+		["Authorization"] = "Bearer " .. session.access_token
+	}
+
+	local state_url = SUPABASE_URL .. "/rest/v1/player_state?user_id=eq." .. session.user_id .. "&select=*"
+
+	http.request(state_url, "GET", function(self, _, response)
+		print("LOAD STATE:", response.status, response.response or "")
+
+		if response.status == 200 then
+			local data = json.decode(response.response)
+			local state = data[1]
+
+			if state then
+				self.score = state.score or 0
+				self.lives = state.lives or 3
+
+				msg.post("/hud#hud", "update_score", { score = self.score })
+				msg.post("/hud#hud", "update_lives", { lives = self.lives })
+			end
+		end
+	end, headers)
+
+	local progress_url = SUPABASE_URL .. "/rest/v1/player_progress?user_id=eq." .. session.user_id .. "&completed=eq.true&select=challenge_id"
+
+	http.request(progress_url, "GET", function(self, _, response)
+		print("LOAD PROGRESS:", response.status, response.response or "")
+
+		if response.status == 200 then
+			local data = json.decode(response.response)
+
+			self.completed_challenges = {}
+
+			for _, row in ipairs(data) do
+				self.completed_challenges[row.challenge_id] = true
+			end
+		end
+	end, headers)
+end
+function reset_progress(self)
+	if session.is_guest or not session.access_token then
+		print("Guest mode: reset locally only")
+		return
+	end
+
+	local headers = {
+		["apikey"] = SUPABASE_ANON_KEY,
+		["Authorization"] = "Bearer " .. session.access_token,
+		["Content-Type"] = "application/json",
+		["Prefer"] = "resolution=merge-duplicates"
+	}
+
+	local state_body = json.encode({
+		user_id = session.user_id,
+		score = 0,
+		lives = 3,
+		updated_at = os.date("!%Y-%m-%dT%H:%M:%SZ")
+	})
+
+	http.request(SUPABASE_URL .. "/rest/v1/player_state", "POST",
+	function(_, _, response)
+		print("RESET STATE:", response.status)
+	end,
+	headers, state_body)
+
+	local progress_body = json.encode({
+		completed = false
+	})
+
+	local progress_url = SUPABASE_URL ..
+	"/rest/v1/player_progress?user_id=eq." .. session.user_id
+
+	http.request(progress_url, "PATCH",
+	function(_, _, response)
+		print("RESET PROGRESS:", response.status)
+	end,
+	headers, progress_body)
 end

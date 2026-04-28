@@ -1,21 +1,30 @@
 local M = {}
 
 M.is_guest = true
-M.user_id = nil
 M.access_token = nil
+M.refresh_token = nil
+M.user_id = nil
+M.email = nil
 M.selected_character = nil
 
 function M.start_guest()
 	M.is_guest = true
-	M.user_id = "guest_" .. tostring(os.time())
 	M.access_token = nil
-	M.selected_character = nil
+	M.refresh_token = nil
+	M.user_id = nil
+	M.email = nil
 end
 
-function M.set_auth(user_id, access_token)
+function M.start_user(auth_data)
 	M.is_guest = false
-	M.user_id = user_id
-	M.access_token = access_token
+	M.access_token = auth_data.access_token
+	M.refresh_token = auth_data.refresh_token
+	M.user_id = auth_data.user.id
+	M.email = auth_data.user.email
 end
 
-return M  
+function M.is_logged_in()
+	return M.access_token ~= nil
+end
+
+return M
