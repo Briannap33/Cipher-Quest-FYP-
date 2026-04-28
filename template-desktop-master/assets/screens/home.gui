@@ -3,20 +3,24 @@ fonts {
   name: "ui"
   font: "/fonts/ui.font"
 }
+fonts {
+  name: "title_screen"
+  font: "/fonts/title_screen.font"
+}
+fonts {
+  name: "nabla"
+  font: "/fonts/nabla.font"
+}
 nodes {
-  size {
-    x: 200.0
-    y: 100.0
-  }
   type: TYPE_BOX
   id: "container"
   inherit_alpha: true
-  alpha: 0.5
+  alpha: 0.94
 }
 nodes {
   size {
-    x: 1280.0
-    y: 720.0
+    x: 1920.0
+    y: 1080.0
   }
   color {
     x: 0.5019608
@@ -27,6 +31,7 @@ nodes {
   id: "bg"
   parent: "container"
   inherit_alpha: true
+  alpha: 0.2
 }
 nodes {
   position {
@@ -37,18 +42,21 @@ nodes {
     y: 1.5
   }
   size {
-    x: 200.0
+    x: 300.0
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    y: 0.8392157
+    z: 0.2
   }
   type: TYPE_TEXT
   text: "Welcome to CipherQuest"
-  font: "ui"
+  font: "nabla"
   id: "title_text"
+  outline {
+    x: 0.3019608
+    y: 0.22745098
+  }
   parent: "container"
   inherit_alpha: true
 }
@@ -61,8 +69,9 @@ nodes {
     y: 120.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8117647
+    y: 0.8784314
+    z: 0.9411765
   }
   type: TYPE_BOX
   id: "btn_signup"
@@ -76,8 +85,9 @@ nodes {
     y: 120.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8117647
+    y: 0.8784314
+    z: 0.9411765
   }
   type: TYPE_BOX
   id: "btn_login"
@@ -94,8 +104,9 @@ nodes {
     y: 120.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8117647
+    y: 0.8784314
+    z: 0.9411765
   }
   type: TYPE_BOX
   id: "btn_guest"
@@ -112,13 +123,13 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.05882353
+    y: 0.12156863
+    z: 0.2
   }
   type: TYPE_TEXT
   text: "Create Your Account"
-  font: "ui"
+  font: "title_screen"
   id: "btn_signup_label"
   parent: "container"
   inherit_alpha: true
@@ -129,14 +140,14 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.05882353
+    y: 0.12156863
+    z: 0.2
   }
   type: TYPE_TEXT
   text: "Log in now!\n"
   ""
-  font: "ui"
+  font: "title_screen"
   id: "btn_login_label"
   parent: "container"
   inherit_alpha: true
@@ -150,13 +161,13 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.05882353
+    y: 0.12156863
+    z: 0.2
   }
   type: TYPE_TEXT
   text: "Continue as a Guest"
-  font: "ui"
+  font: "title_screen"
   id: "btn_guest_label"
   parent: "container"
   inherit_alpha: true

@@ -1,0 +1,6 @@
+font: "/fonts/Nabla/Nabla-Regular-VariableFont_EDPT,EHLT.ttf"
+material: "/builtins/fonts/font.material"
+size: 30
+outline_alpha: 1.0
+outline_width: 3.0
+characters: " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"

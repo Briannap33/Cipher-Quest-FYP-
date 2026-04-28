@@ -3,14 +3,18 @@ fonts {
   name: "ui"
   font: "/fonts/ui.font"
 }
+fonts {
+  name: "nabla"
+  font: "/fonts/nabla.font"
+}
+fonts {
+  name: "title_screen"
+  font: "/fonts/title_screen.font"
+}
 nodes {
   position {
     x: 640.0
     y: 360.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
   }
   type: TYPE_BOX
   id: "container"
@@ -26,6 +30,7 @@ nodes {
   id: "bg"
   parent: "container"
   inherit_alpha: true
+  alpha: 0.0
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
@@ -44,7 +49,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "\"\""
-  font: "ui"
+  font: "title_screen"
   id: "error_message"
   parent: "container"
   inherit_alpha: true
@@ -59,8 +64,9 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8509804
+    y: 0.9019608
+    z: 0.9490196
   }
   type: TYPE_BOX
   id: "back_btn"
@@ -78,14 +84,14 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.101960786
+    y: 0.16470589
+    z: 0.26666668
   }
   type: TYPE_TEXT
   text: "back\n"
   ""
-  font: "ui"
+  font: "title_screen"
   id: "back_btn_label"
   parent: "container"
   inherit_alpha: true
@@ -99,8 +105,9 @@ nodes {
     y: 110.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.4
+    y: 0.8
+    z: 0.5019608
   }
   type: TYPE_BOX
   id: "submit_box_btn"
@@ -116,14 +123,9 @@ nodes {
     x: 200.0
     y: 100.0
   }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_TEXT
   text: "Sign up"
-  font: "ui"
+  font: "title_screen"
   id: "submit_btn_label"
   parent: "container"
   inherit_alpha: true
@@ -138,8 +140,9 @@ nodes {
     y: 64.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8901961
+    y: 0.92941177
+    z: 0.96862745
   }
   type: TYPE_BOX
   id: "pass_box_field"
@@ -157,13 +160,13 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.101960786
+    y: 0.16470589
+    z: 0.26666668
   }
   type: TYPE_TEXT
   text: "Password"
-  font: "ui"
+  font: "title_screen"
   id: "pass_text_field"
   pivot: PIVOT_W
   parent: "container"
@@ -179,8 +182,9 @@ nodes {
     y: 64.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8901961
+    y: 0.92941177
+    z: 0.96862745
   }
   type: TYPE_BOX
   id: "email_box_field"
@@ -198,13 +202,13 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.101960786
+    y: 0.16470589
+    z: 0.26666668
   }
   type: TYPE_TEXT
   text: "Email"
-  font: "ui"
+  font: "title_screen"
   id: "email_text_field"
   pivot: PIVOT_W
   parent: "container"

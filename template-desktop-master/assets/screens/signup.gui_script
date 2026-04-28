@@ -4,6 +4,20 @@ local validators = require "modules.validators"
 local SUPABASE_URL = "https://ienyagebfnkrfmajpinv.supabase.co"
 local SUPABASE_ANON_KEY = "sb_publishable_TaUuZ0V_8zDl9pd8WqSAwA_QqzawH0r"
 
+local function refresh(self)
+	if self.email == "" then
+		gui.set_text(gui.get_node("email_text_field"), "Email")
+	else
+		gui.set_text(gui.get_node("email_text_field"), self.email)
+	end
+
+	if self.password == "" then
+		gui.set_text(gui.get_node("pass_text_field"), "Password")
+	else
+		gui.set_text(gui.get_node("pass_text_field"), string.rep("*", #self.password))
+	end
+end
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.active = "email"
@@ -11,8 +25,7 @@ function init(self)
 	self.password = ""
 	self.loading = false
 	gui.set_text(gui.get_node("error_message"), "")
-	gui.set_text(gui.get_node("email_text_field"), "")
-	gui.set_text(gui.get_node("pass_text_field"), "")
+	refresh(self)
 end
 
 local function clicked(id, x, y)

@@ -293,6 +293,7 @@ function answer_check(self)
 					save_progress(self, points)
 					
 					gui.set_text(gui.get_node("challenge_result"), "Correct! +" .. points .. " points")
+					check_game_complete(self)
 				else
 					gui.set_text(gui.get_node("challenge_result"), "Already completed. Score: " .. self.score)
 				end
@@ -456,4 +457,33 @@ function reset_progress(self)
 		print("RESET PROGRESS:", response.status)
 	end,
 	headers, progress_body)
+end
+function check_game_complete(self)
+	local total = 5
+	local completed = 0
+
+	for _, done in pairs(self.completed_challenges) do
+		if done then
+			completed = completed + 1
+		end
+	end
+
+	if completed >= total then
+		show_game_complete(self)
+	end
+end
+
+function show_game_complete(self)
+	self.timer_running = false
+
+	gui.set_text(gui.get_node("challenge_title"), "Town Saved!")
+	gui.set_text(gui.get_node("challenge_desc"), "Congratulations!\nYou saved the town.")
+	gui.set_text(gui.get_node("challenge_result"), "Final Score: " .. self.score)
+
+	gui.set_enabled(gui.get_node("answer_box"), false)
+	gui.set_enabled(gui.get_node("answer_txt"), false)
+	gui.set_enabled(gui.get_node("submit_bttn"), false)
+	gui.set_enabled(gui.get_node("submit_txt"), false)
+	gui.set_enabled(gui.get_node("hint_bttn"), false)
+	gui.set_enabled(gui.get_node("hint_txt"), false)
 end

@@ -6,6 +6,20 @@ local session = require "modules.session"
 local SUPABASE_URL = "https://ienyagebfnkrfmajpinv.supabase.co"
 local SUPABASE_ANON_KEY = "sb_publishable_TaUuZ0V_8zDl9pd8WqSAwA_QqzawH0r"
 
+local function refresh(self)
+	if self.email == "" then
+		gui.set_text(gui.get_node("email_text_field"), "Email")
+	else
+		gui.set_text(gui.get_node("email_text_field"), self.email)
+	end
+
+	if self.password == "" then
+		gui.set_text(gui.get_node("pass_text_field"), "Password")
+	else
+		gui.set_text(gui.get_node("pass_text_field"), string.rep("*", #self.password))
+	end
+end
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.active = "email"
@@ -16,18 +30,13 @@ function init(self)
 	gui.set_text(gui.get_node("error_message"), "")
 	local w, h = gui.get_width(), gui.get_height()
 	gui.set_position(gui.get_node("container"), vmath.vector3(w * 0.5, h * 0.5, 0))
-	gui.set_text(gui.get_node("email_text_field"), "")
-	gui.set_text(gui.get_node("pass_text_field"), "")
+	refresh(self)
 end
 
 local function clicked(id, x, y)
 	return gui.pick_node(gui.get_node(id), x, y)
 end
 
-local function refresh(self)
-	gui.set_text(gui.get_node("email_text_field"), self.email)
-	gui.set_text(gui.get_node("pass_text_field"), string.rep("*", #self.password))
-end
 
 local function set_error(msg)
 	gui.set_text(gui.get_node("error_message"), msg or "")

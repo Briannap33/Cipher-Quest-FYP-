@@ -3,6 +3,18 @@ fonts {
   name: "ui"
   font: "/fonts/ui.font"
 }
+fonts {
+  name: "title_screen"
+  font: "/fonts/title_screen.font"
+}
+fonts {
+  name: "nabla"
+  font: "/fonts/nabla.font"
+}
+fonts {
+  name: "smaller text"
+  font: "/fonts/smaller text.font"
+}
 textures {
   name: "characters"
   texture: "/assets/atlases/characters.atlas"
@@ -11,10 +23,6 @@ nodes {
   position {
     x: 640.0
     y: 360.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
   }
   type: TYPE_BOX
   id: "container"
@@ -33,24 +41,29 @@ nodes {
   id: "bg"
   parent: "container"
   inherit_alpha: true
+  alpha: 0.0
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    y: 220.0
+    y: 230.0
+  }
+  scale {
+    x: 2.0
+    y: 1.5
   }
   size {
-    x: 200.0
+    x: 300.0
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.12156863
+    y: 0.16470589
+    z: 0.21960784
   }
   type: TYPE_TEXT
   text: "Choose your player"
-  font: "ui"
+  font: "title_screen"
   id: "title_label"
   parent: "container"
   inherit_alpha: true
@@ -61,13 +74,13 @@ nodes {
     y: 100.0
   }
   size {
-    x: 180.0
-    y: 180.0
+    x: 200.0
+    y: 200.0
   }
   color {
-    x: 0.8
-    y: 0.8
-    z: 0.8
+    x: 0.9098039
+    y: 0.94509804
+    z: 0.96862745
   }
   type: TYPE_BOX
   id: "chrter1_btn"
@@ -81,13 +94,13 @@ nodes {
     y: 100.0
   }
   size {
-    x: 180.0
-    y: 180.0
+    x: 200.0
+    y: 200.0
   }
   color {
-    x: 0.8
-    y: 0.8
-    z: 0.8
+    x: 0.9098039
+    y: 0.94509804
+    z: 0.96862745
   }
   type: TYPE_BOX
   id: "chrter2_btn"
@@ -98,21 +111,20 @@ nodes {
 nodes {
   position {
     x: -200.0
-    y: -20.0
+    y: -15.0
   }
   size {
     x: 100.0
     y: 50.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.12156863
+    y: 0.16470589
+    z: 0.21960784
   }
   type: TYPE_TEXT
-  text: "tbc\n"
-  ""
-  font: "ui"
+  text: "Jake Carter"
+  font: "title_screen"
   id: "chrter1_name"
   parent: "container"
   inherit_alpha: true
@@ -120,49 +132,51 @@ nodes {
 nodes {
   position {
     x: -200.0
-    y: -90.0
+    y: -70.0
   }
   size {
     x: 100.0
     y: 80.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.22352941
+    y: 0.27058825
+    z: 0.3137255
   }
   type: TYPE_TEXT
-  text: "tbc"
-  font: "ui"
+  text: "Laid-back and always up for an adventure."
+  font: "smaller text"
   id: "chrter1_desc"
+  line_break: true
   parent: "container"
   inherit_alpha: true
 }
 nodes {
   position {
     x: 200.0
-    y: -90.0
+    y: -70.0
   }
   size {
     x: 100.0
     y: 80.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.22245364
+    y: 0.27192372
+    z: 0.31557378
   }
   type: TYPE_TEXT
-  text: "tbc"
-  font: "ui"
+  text: "Confident and ready to take on anything."
+  font: "smaller text"
   id: "chrter2_desc"
+  line_break: true
   parent: "container"
   inherit_alpha: true
 }
 nodes {
   position {
     x: 200.0
-    y: -20.0
+    y: -15.0
   }
   rotation {
     x: -4.019
@@ -172,14 +186,15 @@ nodes {
     y: 50.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.12156863
+    y: 0.16470589
+    z: 0.21960784
   }
   type: TYPE_TEXT
-  text: "tbc\n"
+  text: "Mia Miller\n"
+  "\n"
   ""
-  font: "ui"
+  font: "title_screen"
   id: "chrter2_name"
   parent: "container"
   inherit_alpha: true
@@ -193,8 +208,9 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.29803923
+    y: 0.6862745
+    z: 0.3137255
   }
   type: TYPE_BOX
   id: "confirm_btn"
@@ -212,8 +228,9 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.6
+    x: 0.62352943
     y: 0.7019608
+    z: 0.78431374
   }
   type: TYPE_BOX
   id: "back_btn"
@@ -229,14 +246,9 @@ nodes {
     x: 300.0
     y: 100.0
   }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_TEXT
   text: "Confirm Selection"
-  font: "ui"
+  font: "title_screen"
   id: "confirm_txt"
   parent: "container"
   inherit_alpha: true
@@ -251,13 +263,13 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.12156863
+    y: 0.16470589
+    z: 0.21960784
   }
   type: TYPE_TEXT
   text: "Back"
-  font: "ui"
+  font: "title_screen"
   id: "back_txt"
   parent: "container"
   inherit_alpha: true

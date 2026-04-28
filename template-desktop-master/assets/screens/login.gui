@@ -3,14 +3,19 @@ fonts {
   name: "ui"
   font: "/fonts/ui.font"
 }
+fonts {
+  name: "title_screen"
+  font: "/fonts/title_screen.font"
+}
 nodes {
   position {
     x: -34.0
     y: 66.0
   }
-  size {
-    x: 200.0
-    y: 100.0
+  color {
+    x: 0.9607843
+    y: 0.96862745
+    z: 0.98039216
   }
   type: TYPE_BOX
   id: "container"
@@ -27,8 +32,9 @@ nodes {
     y: 64.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8901961
+    y: 0.92941177
+    z: 0.96862745
   }
   type: TYPE_BOX
   id: "email_box_field"
@@ -39,21 +45,22 @@ nodes {
 }
 nodes {
   position {
-    x: -17.0
+    x: -30.0
     y: 62.0
+    z: 1.0
   }
   size {
     x: 200.0
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.101960786
+    y: 0.16470589
+    z: 0.26666668
   }
   type: TYPE_TEXT
   text: "Email"
-  font: "ui"
+  font: "title_screen"
   id: "email_text_field"
   pivot: PIVOT_W
   parent: "container"
@@ -70,8 +77,9 @@ nodes {
     y: 64.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8901961
+    y: 0.92941177
+    z: 0.96862745
   }
   type: TYPE_BOX
   id: "pass_box_field"
@@ -82,7 +90,7 @@ nodes {
 }
 nodes {
   position {
-    x: -16.0
+    x: -30.0
     y: -68.0
   }
   size {
@@ -90,13 +98,13 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.101960786
+    y: 0.16470589
+    z: 0.26666668
   }
   type: TYPE_TEXT
   text: "Password"
-  font: "ui"
+  font: "title_screen"
   id: "pass_text_field"
   pivot: PIVOT_W
   parent: "container"
@@ -113,8 +121,9 @@ nodes {
     y: 110.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.4
+    y: 0.8
+    z: 0.5019608
   }
   type: TYPE_BOX
   id: "login_btn"
@@ -132,14 +141,9 @@ nodes {
     x: 200.0
     y: 100.0
   }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_TEXT
   text: "Log in"
-  font: "ui"
+  font: "title_screen"
   id: "login_label_btn"
   parent: "container"
   layer: "ui_layer"
@@ -155,8 +159,9 @@ nodes {
     y: 80.0
   }
   color {
-    x: 0.6
-    y: 0.7019608
+    x: 0.8509804
+    y: 0.9019608
+    z: 0.9490196
   }
   type: TYPE_BOX
   id: "back_btn"
@@ -175,13 +180,13 @@ nodes {
     y: 100.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.101960786
+    y: 0.16470589
+    z: 0.26666668
   }
   type: TYPE_TEXT
   text: "Back"
-  font: "ui"
+  font: "title_screen"
   id: "back_label_btn"
   parent: "container"
   layer: "ui_layer"
@@ -203,7 +208,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "\"\""
-  font: "ui"
+  font: "title_screen"
   id: "error_message"
   parent: "container"
   layer: "ui_layer"
@@ -222,6 +227,7 @@ nodes {
   id: "bg"
   parent: "container"
   inherit_alpha: true
+  alpha: 0.0
   size_mode: SIZE_MODE_AUTO
 }
 layers {
