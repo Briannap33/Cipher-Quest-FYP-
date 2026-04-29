@@ -3,6 +3,14 @@ fonts {
   name: "ui"
   font: "/fonts/ui.font"
 }
+fonts {
+  name: "smaller text"
+  font: "/fonts/smaller text.font"
+}
+fonts {
+  name: "tiny"
+  font: "/fonts/tiny.font"
+}
 nodes {
   position {
     x: 200.0
@@ -23,27 +31,27 @@ nodes {
   position {
     x: 200.0
     y: 200.0
+    z: 5.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.8
   }
   type: TYPE_BOX
   id: "NPC_dialogue"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   enabled: false
-  visible: false
 }
 nodes {
   position {
     x: 200.0
-    y: 200.0
+    y: 70.0
   }
   size {
     x: 200.0
     y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "continue"
@@ -60,11 +68,6 @@ nodes {
   size {
     x: 200.0
     y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "\"\""
@@ -84,9 +87,9 @@ nodes {
     y: 260.0
   }
   color {
-    x: 0.3019608
-    y: 0.2
-    z: 0.6
+    x: 0.4
+    y: 0.8
+    z: 0.5019608
   }
   type: TYPE_BOX
   id: "challenge_popup"
@@ -137,9 +140,9 @@ nodes {
     y: 30.0
   }
   color {
-    x: 0.6
-    y: 0.3019608
-    z: 0.4
+    x: 0.8509804
+    y: 0.9019608
+    z: 0.9490196
   }
   type: TYPE_BOX
   id: "close_button"
@@ -157,13 +160,13 @@ nodes {
     y: 30.0
   }
   color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    x: 0.101960786
+    y: 0.2
+    z: 0.6
   }
   type: TYPE_TEXT
   text: "close"
-  font: "ui"
+  font: "tiny"
   id: "close_bttn_txt"
   parent: "challenge_popup"
   inherit_alpha: true
@@ -183,7 +186,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "\"\""
-  font: "ui"
+  font: "smaller text"
   id: "challenge_desc"
   line_break: true
   parent: "challenge_popup"
@@ -196,6 +199,11 @@ nodes {
   size {
     x: 260.0
     y: 40.0
+  }
+  color {
+    x: 0.8509804
+    y: 0.9019608
+    z: 0.9490196
   }
   type: TYPE_BOX
   id: "answer_box"
@@ -219,7 +227,7 @@ nodes {
   type: TYPE_TEXT
   text: "answer\n"
   ""
-  font: "ui"
+  font: "tiny"
   id: "answer_txt"
   parent: "challenge_popup"
   inherit_alpha: true
@@ -255,7 +263,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "submit"
-  font: "ui"
+  font: "tiny"
   id: "submit_txt"
   parent: "challenge_popup"
   inherit_alpha: true
@@ -275,7 +283,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "\"\""
-  font: "ui"
+  font: "tiny"
   id: "challenge_title"
   parent: "challenge_popup"
   inherit_alpha: true
@@ -296,7 +304,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "click here for a hint!"
-  font: "ui"
+  font: "tiny"
   id: "hint_txt"
   line_break: true
   parent: "challenge_popup"

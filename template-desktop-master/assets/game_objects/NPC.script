@@ -3,28 +3,28 @@ go.property("npc_index", 1)
 local npc_data = {
 	[1.0] = {
 		npc_id = "house",
-		dialogue_text = "This house hides an old clue in its walls. See if you can solve it.",
+		dialogue_text = "Oh dear… I’m not very good with these emails.I’ve received a few messages, and one of them looks a bit worrying…It says my bank account is locked and I need to click a link.I’m not sure which one I can trust.Could you take a look and help me figure out which email is dangerous?",
 		challenge_id = "challenge_house"
 	},
 	
 	[2.0] = {
 		npc_id = "dog",
-		dialogue_text = "Woof! I buried a secret message. Can you sniff out the flag?",
+		dialogue_text = "Woof! I was waiting for my treat delivery… but something strange happened!The delivery message came as a weird code instead of words.I can’t read it at all… and I REALLY want my treats! you decode the message for me so I can get my snack?",
 		challenge_id = "challenge_dog"
 	},
 	[3.0] = {
 		npc_id = "banker",
-		dialogue_text = "Welcome to the bank. Prove you can decode the vault record.",
+		dialogue_text = "This is very troubling…Someone managed to access my account, but I never shared my password.The only thing I can think of is my security question…Maybe I’ve shared too much information somewhere?Can you check what I’ve posted and figure out what they might have used?",
 		challenge_id = "challenge_banker"
 	},
 	[4.0] = {
 		npc_id = "shopkeeper",
-		dialogue_text = "Business is slow. Solve this little puzzle and I might reward you.",
+		dialogue_text = "I’ve been trying to order new stock for my shop online…But there are so many websites that look almost the same!I’m worried I might click the wrong one and get scammed.Could you help me choose the real website before I place my order?",
 		challenge_id = "challenge_shopkeeper"
 	},
 	[5.0] = {
 		npc_id = "worker",
-		dialogue_text = "I found a broken terminal log at the worksite. Maybe you can decode it.",
+		dialogue_text = "Hey… something’s not right with my system.My password has been changed, and all I found was this note:Only Caesar can solve this.”There’s also a strange coded message on the screen.I have no idea what it means… can you help me decode it so I can get back in?",
 		challenge_id = "challenge_worker"
 	}
 }
