@@ -30,19 +30,23 @@ nodes {
 nodes {
   position {
     x: 200.0
-    y: 200.0
-    z: 5.0
+    y: 250.0
+    z: -1.0
+  }
+  size {
+    x: 225.0
+    y: 300.0
   }
   color {
-    x: 0.6
-    y: 0.8
-    z: 0.8
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_BOX
   id: "NPC_dialogue"
   inherit_alpha: true
+  alpha: 0.6
   size_mode: SIZE_MODE_AUTO
-  enabled: false
 }
 nodes {
   position {
@@ -123,6 +127,11 @@ nodes {
   size {
     x: 120.0
     y: 40.0
+  }
+  color {
+    x: 0.8509804
+    y: 0.9019608
+    z: 0.9490196
   }
   type: TYPE_BOX
   id: "submit_bttn"
@@ -241,6 +250,11 @@ nodes {
     x: 120.0
     y: 40.0
   }
+  color {
+    x: 0.8509804
+    y: 0.9019608
+    z: 0.9490196
+  }
   type: TYPE_BOX
   id: "hint_bttn"
   parent: "challenge_popup"
@@ -270,7 +284,7 @@ nodes {
 }
 nodes {
   position {
-    y: 90.0
+    y: 110.0
   }
   size {
     x: 360.0
